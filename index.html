@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Class Turkish Barber - Edinburgh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --dark-gray: #1a1a1a;
+            --medium-gray: #2a2a2a;
+            --light-gray: #a0a0a0;
+            --gold: #d4af37;
+            --off-white: #f5f5f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--black);
+            color: var(--off-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--off-white);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--gold);
+        }
+
+        /* Page Container */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--black) 0%, var(--dark-gray) 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(212, 175, 55, 0.03) 2px,
+                    rgba(212, 175, 55, 0.03) 4px
+                );
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--off-white);
+            letter-spacing: 3px;
+            animation: slideUp 1s ease 0.2s both;
+        }
+
+        .hero .subtitle {
+            font-size: 1.2rem;
+            color: var(--gold);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            animation: slideUp 1s ease 0.4s both;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--light-gray);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+            animation: slideUp 1s ease 0.6s both;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: var(--gold);
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--gold);
+            animation: slideUp 1s ease 0.8s both;
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 6rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--light-gray);
+            margin-bottom: 4rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: var(--dark-gray);
+            padding: 3rem 2rem;
+            border: 1px solid var(--medium-gray);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--off-white);
+        }
+
+        .service-card p {
+            color: var(--light-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .service-price {
+            font-size: 1.5rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            background: var(--medium-gray);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--medium-gray);
+            cursor: pointer;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(10, 10, 10, 0.8));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
+        /* Team Grid */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .team-member {
+            text-align: center;
+        }
+
+        .team-photo {
+            width: 100%;
+            aspect-ratio: 3/4;
+            background: var(--medium-gray);
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--medium-gray);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-photo::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 50%, rgba(212, 175, 55, 0.1));
+        }
+
+        .team-member h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--off-white);
+        }
+
+        .team-member .role {
+            color: var(--gold);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .team-member p {
+            color: var(--light-gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Contact Form */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .contact-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--gold);
+        }
+
+        .info-item {
+            margin-bottom: 2rem;
+        }
+
+        .info-item h4 {
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--light-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .info-item p {
+            color: var(--off-white);
+            font-size: 1.1rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--light-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 1rem;
+            background: var(--dark-gray);
+            border: 1px solid var(--medium-gray);
+            color: var(--off-white);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            padding: 1rem 3rem;
+            background: var(--gold);
+            color: var(--black);
+            border: 2px solid var(--gold);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            align-self: flex-start;
+        }
+
+        .submit-btn:hover {
+            background: transparent;
+            color: var(--gold);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-gray);
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid var(--medium-gray);
+            margin-top: 4rem;
+        }
+
+        footer p {
+            color: var(--light-gray);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .services-grid,
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo" data-page="home">FIRST CLASS TURKISH BARBER</a>
+            <ul class="nav-links">
+                <li><a href="#" class="active" data-page="home">Home</a></li>
+                <li><a href="#" data-page="services">Services</a></li>
+                <li><a href="#" data-page="gallery">Gallery</a></li>
+                <li><a href="#" data-page="team">Team</a></li>
+                <li><a href="#" data-page="contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div class="page active" id="home">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>FIRST CLASS TURKISH BARBER</h1>
+                <div class="subtitle">Edinburgh</div>
+                <p>Premium Turkish barbering located at 65 Broughton Street, EH1 3RJ. Experience traditional cuts and hot shaves with expert service.</p>
+                <a href="#" class="cta-button" data-page="services">View Services</a>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">The Experience</h2>
+            <p class="section-subtitle">Traditional Excellence</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Precision Cuts</h3>
+                    <p>Expert haircuts using traditional Turkish barbering techniques, tailored to your style and facial structure.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Luxury Shaves</h3>
+                    <p>Authentic hot towel wet shaves and hot shaves that leave your skin feeling refreshed and smooth.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Beard Care</h3>
+                    <p>Professional beard trims and sculpting to maintain a sharp, well-groomed appearance.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Services Page -->
+    <div class="page" id="services">
+        <section class="section">
+            <h2 class="section-title">Our Services</h2>
+            <p class="section-subtitle">Pricing & Details</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Hair Cut</h3>
+                    <p>A classic haircut with attention to detail. Includes consultation and styling.</p>
+                    <div class="service-price">£20.00</div>
+                </div>
+                <div class="service-card">
+                    <h3>Skin Fade</h3>
+                    <p>Precise fade haircut with clippers, seamlessly blended for a sharp look.</p>
+                    <div class="service-price">£20.00</div>
+                </div>
+                <div class="service-card">
+                    <h3>Hair Cut & Hot Shave</h3>
+                    <p>Complete grooming experience with a haircut and traditional hot shave using a straight razor.</p>
+                    <div class="service-price">£35.00</div>
+                </div>
+                <div class="service-card">
+                    <h3>Wet Shave Hot Towel</h3>
+                    <p>Traditional wet shave with pre-shave oil and hot towels for ultimate comfort and closeness.</p>
+                    <div class="service-price">£20.00</div>
+                </div>
+                <div class="service-card">
+                    <h3>Beard Trim</h3>
+                    <p>Professional shaping and trimming of your beard to maintain your desired style.</p>
+                    <div class="service-price">£15.00</div>
+                </div>
+                <div class="service-card">
+                    <h3>Buzz Cut</h3>
+                    <p>Simple and clean buzz cut for a low-maintenance, stylish look.</p>
+                    <div class="service-price">£20.00</div>
+                </div>
+                <div class="service-card">
+                    <h3>Clippers Cut</h3>
+                    <p>Efficient haircut using clippers only, perfect for maintaining shorter styles.</p>
+                    <div class="service-price">£15.00</div>
+                </div>
+                <div class="service-card">
+                    <h3>Kids Haircut</h3>
+                    <p>Gentle haircut service for children, making their first barber experiences positive.</p>
+                    <div class="service-price">£15.00</div>
+                </div>
+                <div class="service-card">
+                    <h3>Pensioner Cut</h3>
+                    <p>Special discounted rate for senior customers.</p>
+                    <div class="service-price">£15.00</div>
+                </div>
+                <div class="service-card">
+                    <h3>Nose Waxing</h3>
+                    <p>Quick and effective nose hair removal service.</p>
+                    <div class="service-price">£5.00</div>
+                </div>
+                <div class="service-card">
+                    <h3>Full Service</h3>
+                    <p>Our premium package including haircut, hot shave, and beard trim for the complete grooming experience.</p>
+                    <div class="service-price">£40.00</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Gallery Page -->
+    <div class="page" id="gallery">
+        <section class="section">
+            <h2 class="section-title">Our Work</h2>
+            <p class="section-subtitle">Portfolio</p>
+            <div class="gallery-grid">
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Team Page -->
+    <div class="page" id="team">
+        <section class="section">
+            <h2 class="section-title">Our Barbers</h2>
+            <p class="section-subtitle">Meet the Team</p>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="team-photo"></div>
+                    <h3>Barber 1</h3>
+                    <div class="role">Master Barber</div>
+                    <p>Skilled Barber</p>
+                </div>
+                <div class="team-member">
+                    <div class="team-photo"></div>
+                    <h3>Barber 2</h3>
+                    <div class="role">Senior Barber</div>
+                    <p>Skilled Barber</p>
+                </div>
+                <div class="team-member">
+                    <div class="team-photo"></div>
+                    <h3>Barber 3</h3>
+                    <div class="role">Barber</div>
+                    <p>Skilled Barber</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact Page -->
+    <div class="page" id="contact">
+        <section class="section">
+            <h2 class="section-title">Visit Us</h2>
+            <p class="section-subtitle">Get In Touch</p>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>First Class Turkish Barber</h3>
+                    <div class="info-item">
+                        <h4>Address</h4>
+                        <p>65 Broughton Street<br>Edinburgh<br>EH1 3RJ</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>Contact</h4>
+                        <p>Phone: Please check Booksy for contact details<br>
+                        Booking: Available through Booksy platform</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>Hours</h4>
+                        <p>Monday - Sunday: 9:00 AM - 8:00 PM<br>
+                        (Hours may vary - please book in advance)</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>Amenities</h4>
+                        <p>Wi-Fi available<br>
+                        Credit cards accepted<br>
+                        Accessible for people with disabilities<br>
+                        Child-friendly environment</p>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 First Class Turkish Barber Edinburgh. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Page Navigation
+        const navLinks = document.querySelectorAll('[data-page]');
+        const pages = document.querySelectorAll('.page');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetPage = link.getAttribute('data-page');
+
+                // Update active states
+                navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+
+                // Show target page
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                    if (page.id === targetPage) {
+                        page.classList.add('active');
+                        window.scrollTo(0, 0);
+                    }
+                });
+            });
+        });
+
+        // Form Submission
+        document.querySelector('.contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you shortly.');
+            e.target.reset();
+        });
+    </script>
+</body>
+</html>
