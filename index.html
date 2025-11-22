@@ -400,8 +400,8 @@
         }
 
         .info-item h4 {
-            font-size: 0.85rem;
-            letter-spacing: 1px;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
             color: var(--light-gray);
             margin-bottom: 0.5rem;
@@ -487,6 +487,13 @@
             letter-spacing: 1px;
         }
 
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: var(--light-gray);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
@@ -542,8 +549,19 @@
         <section class="section">
             <h2 class="section-title">The Experience</h2>
             <p class="section-subtitle">Traditional Excellence</p>
-            <div class="services-grid" id="home-services">
-                <div class="service-card"><p>Loading services...</p></div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Precision Cuts</h3>
+                    <p>Expert haircuts using traditional Turkish barbering techniques, tailored to your style and facial structure.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Luxury Shaves</h3>
+                    <p>Authentic hot towel wet shaves and hot shaves that leave your skin feeling refreshed and smooth.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Beard Care</h3>
+                    <p>Professional beard trims and sculpting to maintain a sharp, well-groomed appearance.</p>
+                </div>
             </div>
         </section>
     </div>
@@ -553,8 +571,8 @@
         <section class="section">
             <h2 class="section-title">Our Services</h2>
             <p class="section-subtitle">Pricing & Details</p>
-            <div class="services-grid" id="services-grid">
-                <div class="service-card"><p>Loading services...</p></div>
+            <div class="services-grid" id="servicesContainer">
+                <div class="loading">Loading services...</div>
             </div>
         </section>
     </div>
@@ -586,21 +604,21 @@
             <div class="team-grid">
                 <div class="team-member">
                     <div class="team-photo"></div>
-                    <h3>Erol Kircicek</h3>
+                    <h3>Barber 1</h3>
                     <div class="role">Master Barber</div>
-                    <p>A highly rated barber known for excellent service and great haircuts. Customers have praised Erol for providing "the best haircut I've ever had".</p>
+                    <p>Skilled Barber</p>
                 </div>
                 <div class="team-member">
                     <div class="team-photo"></div>
-                    <h3>Turan Yilmaz</h3>
+                    <h3>Barber 2</h3>
                     <div class="role">Senior Barber</div>
-                    <p>Bringing years of Turkish barbering tradition to Edinburgh, specializing in classic cuts and hot shaves.</p>
+                    <p>Skilled Barber</p>
                 </div>
                 <div class="team-member">
                     <div class="team-photo"></div>
-                    <h3>Mehmet Demir</h3>
+                    <h3>Barber 3</h3>
                     <div class="role">Barber</div>
-                    <p>Expert in contemporary fades and beard styling, combining modern techniques with craftsmanship.</p>
+                    <p>Skilled Barber</p>
                 </div>
             </div>
         </section>
@@ -616,20 +634,19 @@
                     <h3>First Class Turkish Barber</h3>
                     <div class="info-item">
                         <h4>Address</h4>
-                        <p id="address-placeholder">Loading address...</p>
+                        <p id="addressInfo">Loading...</p>
                     </div>
                     <div class="info-item">
                         <h4>Contact</h4>
-                        <p>Phone: Please check Booksy for contact details<br>
-                        Booking: Available through Booksy platform</p>
+                        <p id="contactInfo">Loading...</p>
                     </div>
                     <div class="info-item">
                         <h4>Hours</h4>
-                        <p id="hours-placeholder">Loading hours...</p>
+                        <p id="hoursInfo">Loading...</p>
                     </div>
                     <div class="info-item">
                         <h4>Amenities</h4>
-                        <p id="amenities-placeholder">Loading amenities...</p>
+                        <p id="amenitiesInfo">Loading...</p>
                     </div>
                 </div>
                 <form class="contact-form">
@@ -661,70 +678,132 @@
     </footer>
 
     <script>
-        // --- Dynamic Content Loader ---
+        // Google Sheets URLs
+        const SHEET_BASE_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQG61CYkYWoT_Y9zr9E06wBSYbDDRnSjqJFdkZGpm6aq3_hqb3QxCk9MhWgUya4KfRcy7cz8ccCeUHX';
+        
+        const SERVICES_URL = `${SHEET_BASE_URL}/pub?gid=0&single=true&output=csv`;
+        const HOURS_URL = `${SHEET_BASE_URL}/pub?gid=2079487819&single=true&output=csv`;
+        const INFO_URL = `${SHEET_BASE_URL}/pub?gid=1335848551&single=true&output=csv`;
+
+        // Parse CSV data
         async function loadCSV(url) {
             try {
                 const response = await fetch(url);
                 const text = await response.text();
-                const rows = text.trim().split("\n").map(r => r.split(","));
+                const rows = text.trim().split('\n').map(row => {
+                    // Handle CSV with proper quote parsing
+                    const result = [];
+                    let current = '';
+                    let inQuotes = false;
+                    
+                    for (let i = 0; i < row.length; i++) {
+                        const char = row[i];
+                        if (char === '"') {
+                            inQuotes = !inQuotes;
+                        } else if (char === ',' && !inQuotes) {
+                            result.push(current.trim());
+                            current = '';
+                        } else {
+                            current += char;
+                        }
+                    }
+                    result.push(current.trim());
+                    return result;
+                });
+                
                 const headers = rows[0];
-                return rows.slice(1).map(r =>
-                    Object.fromEntries(r.map((v, i) => [headers[i], v.trim()]))
+                return rows.slice(1).filter(row => row.length > 1 && row[0]).map(row =>
+                    Object.fromEntries(row.map((value, i) => [headers[i], value]))
                 );
             } catch (error) {
-                console.error("Failed to load CSV:", url, error);
+                console.error('Error loading CSV:', error);
                 return [];
             }
         }
 
-        async function loadData() {
-            const SERVICES_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQG61CYkYWoT_Y9zr9E06wBSYbDDRnSjqJFdkZGpm6aq3_hqb3QxCk9MhWgUya4KfRcy7cz8ccCeUHX/pub?output=csv&gid=0";
-            const HOURS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQG61CYkYWoT_Y9zr9E06wBSYbDDRnSjqJFdkZGpm6aq3_hqb3QxCk9MhWgUya4KfRcy7cz8ccCeUHX/pub?output=csv&gid=2079487819";
-            const INFO_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQG61CYkYWoT_Y9zr9E06wBSYbDDRnSjqJFdkZGpm6aq3_hqb3QxCk9MhWgUya4KfRcy7cz8ccCeUHX/pub?output=csv&gid=1335848551";
-
-            const [services, hours, info] = await Promise.all([
-                loadCSV(SERVICES_URL),
-                loadCSV(HOURS_URL),
-                loadCSV(INFO_URL)
-            ]);
-
-            // --- Populate Services ---
-            const serviceHTML = services.map(s => `
+        // Load and populate services
+        async function loadServices() {
+            const services = await loadCSV(SERVICES_URL);
+            const container = document.getElementById('servicesContainer');
+            
+            if (services.length === 0) {
+                container.innerHTML = '<p style="color: var(--light-gray); text-align: center;">Unable to load services. Please try again later.</p>';
+                return;
+            }
+            
+            container.innerHTML = services.map(service => `
                 <div class="service-card">
-                    <h3>${s.service_name}</h3>
-                    <p>${s.description}</p>
-                    <div class="service-price">£${s.price}</div>
+                    <h3>${service.service_name || 'Service'}</h3>
+                    <p>${service.description || ''}</p>
+                    <div class="service-price">£${service.price || '0'}</div>
                 </div>
             `).join('');
+        }
 
-            document.getElementById('services-grid')?.innerHTML = serviceHTML;
-            document.getElementById('home-services')?.innerHTML = serviceHTML;
+        // Load and populate hours
+        async function loadHours() {
+            const hours = await loadCSV(HOURS_URL);
+            const hoursInfo = document.getElementById('hoursInfo');
+            
+            if (hours.length === 0) {
+                hoursInfo.innerHTML = 'Hours information unavailable';
+                return;
+            }
+            
+            hoursInfo.innerHTML = hours.map(day => 
+                `${day.day}: ${day.open} - ${day.close}`
+            ).join('<br>');
+        }
 
-            // --- Populate Shop Info ---
-            const infoObj = Object.fromEntries(info.map(i => [i.field, i.value]));
-
-            document.getElementById('address-placeholder').innerHTML = `
-                ${infoObj.address_line1}<br>
-                ${infoObj.address_line2}<br>
-                ${infoObj.postcode}
-            `;
-
+        // Load and populate shop info
+        async function loadShopInfo() {
+            const info = await loadCSV(INFO_URL);
+            
+            if (info.length === 0) {
+                document.getElementById('addressInfo').innerHTML = 'Address information unavailable';
+                document.getElementById('contactInfo').innerHTML = 'Contact information unavailable';
+                document.getElementById('amenitiesInfo').innerHTML = 'Amenities information unavailable';
+                return;
+            }
+            
+            // Convert array to object
+            const infoObj = {};
+            info.forEach(item => {
+                infoObj[item.field] = item.value;
+            });
+            
+            // Populate address
+            const addressInfo = document.getElementById('addressInfo');
+            addressInfo.innerHTML = `${infoObj.address_line1 || ''}<br>${infoObj.address_line2 || ''}<br>${infoObj.postcode || ''}`;
+            
+            // Populate contact
+            const contactInfo = document.getElementById('contactInfo');
+            contactInfo.innerHTML = `Phone: ${infoObj.phone || 'N/A'}<br>Booking: ${infoObj.booking || 'N/A'}`;
+            
+            // Populate amenities
+            const amenitiesInfo = document.getElementById('amenitiesInfo');
             const amenities = [];
             if (infoObj.wifi === 'Yes') amenities.push('Wi-Fi available');
             if (infoObj.credit_cards === 'Yes') amenities.push('Credit cards accepted');
             if (infoObj.accessibility === 'Yes') amenities.push('Accessible for people with disabilities');
             if (infoObj.child_friendly === 'Yes') amenities.push('Child-friendly environment');
-            document.getElementById('amenities-placeholder').innerHTML = amenities.join('<br>');
-
-            // --- Populate Hours ---
-            const hoursHTML = hours.map(h => `${h.day}: ${h.open} - ${h.close}`).join('<br>');
-            document.getElementById('hours-placeholder').innerHTML = hoursHTML;
+            
+            amenitiesInfo.innerHTML = amenities.join('<br>');
         }
 
-        // Run on page load
-        window.addEventListener('DOMContentLoaded', loadData);
+        // Load all data
+        async function loadAllData() {
+            await Promise.all([
+                loadServices(),
+                loadHours(),
+                loadShopInfo()
+            ]);
+        }
 
-        // --- Navigation ---
+        // Initialize on page load
+        loadAllData();
+
+        // Page Navigation
         const navLinks = document.querySelectorAll('[data-page]');
         const pages = document.querySelectorAll('.page');
 
@@ -733,9 +812,11 @@
                 e.preventDefault();
                 const targetPage = link.getAttribute('data-page');
 
+                // Update active states
                 navLinks.forEach(l => l.classList.remove('active'));
                 link.classList.add('active');
 
+                // Show target page
                 pages.forEach(page => {
                     page.classList.remove('active');
                     if (page.id === targetPage) {
@@ -746,8 +827,8 @@
             });
         });
 
-        // --- Form Submission ---
-        document.querySelector('.contact-form')?.addEventListener('submit', (e) => {
+        // Form Submission
+        document.querySelector('.contact-form').addEventListener('submit', (e) => {
             e.preventDefault();
             alert('Thank you for your message! We will get back to you shortly.');
             e.target.reset();
