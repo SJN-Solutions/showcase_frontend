@@ -3,137 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>First Class Turkish Barber - Edinburgh</title>
+    <title>First Class Turkish Barber | Premium Haircuts & Hot Shaves in Edinburgh</title>
+    <meta name="description" content="Experience premium Turkish barbering at First Class Turkish Barber on Broughton Street, Edinburgh. Expert haircuts, hot towel shaves, beard trims, skin fades, and nose waxing. Book your visit today.">
+    <link rel="canonical" href="https://yourusername.github.io/first-class-turkish-barber/">
+    <meta property="og:title" content="First Class Turkish Barber - Edinburgh">
+    <meta property="og:description" content="Premium haircuts, hot shaves, and beard grooming in the heart of Edinburgh. Services from £5.">
+    <meta property="og:url" content="https://yourusername.github.io/first-class-turkish-barber/">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="images/barber-shop-exterior.jpg">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Montserrat:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script id="dynamic-schema" type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Barbershop",
+      "name": "First Class Turkish Barber",
+      "url": "https://yourusername.github.io/first-class-turkish-barber/",
+      "image": "images/barber-shop-interior.jpg",
+      "priceRange": "£5–£40",
+      "servesCuisine": "Turkish barbering",
+      "sameAs": [
+        "https://booksy.com/en-gb/136838_first-class-turkish-barber_barber_1576586_edinburgh"
+      ]
+    }
+    </script>
     <style>
         :root {
-            --black: #0a0a0a;
-            --dark-gray: #1a1a1a;
-            --medium-gray: #2a2a2a;
-            --light-gray: #a0a0a0;
-            --gold: #d4af37;
-            --off-white: #f5f5f5;
+            --rich-black: #0d0d0d;
+            --deep-charcoal: #1a1a1a;
+            --charcoal: #252525;
+            --warm-gray: #3a3a3a;
+            --silver: #b8b8b8;
+            --bright-gold: #daa520;
+            --deep-gold: #b8860b;
+            --burnt-gold: #996515;
+            --cream: #faf9f6;
+            --soft-white: #f5f5f0;
+            --copper: #b87333;
         }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: var(--black);
-            color: var(--off-white);
-            line-height: 1.6;
+            background-color: var(--rich-black);
+            color: var(--soft-white);
+            line-height: 1.7;
             overflow-x: hidden;
         }
-
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--rich-black);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--deep-gold);
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--bright-gold);
+        }
         /* Navigation */
         nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1.5rem 5%;
+            background: rgba(13, 13, 13, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 1.2rem 6%;
             z-index: 1000;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            border-bottom: 1px solid rgba(218, 165, 32, 0.15);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
+        nav.scrolled {
+            padding: 0.8rem 6%;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
         .nav-container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
         .logo {
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--gold);
-            letter-spacing: 2px;
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--bright-gold);
+            letter-spacing: 3px;
             text-decoration: none;
+            position: relative;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
         }
-
+        .logo:hover {
+            color: var(--deep-gold);
+            letter-spacing: 4px;
+        }
         .nav-links {
             display: flex;
-            gap: 3rem;
+            gap: 3.5rem;
             list-style: none;
         }
-
         .nav-links a {
-            color: var(--off-white);
+            color: var(--soft-white);
             text-decoration: none;
-            font-weight: 400;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            transition: color 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
+            padding: 0.5rem 0;
         }
-
-        .nav-links a::after {
+        .nav-links a::before {
             content: '';
             position: absolute;
-            bottom: -5px;
-            left: 0;
+            bottom: 0;
+            left: 50%;
             width: 0;
-            height: 1px;
-            background: var(--gold);
-            transition: width 0.3s ease;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--bright-gold), transparent);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateX(-50%);
         }
-
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
+        .nav-links a:hover::before,
+        .nav-links a.active::before {
             width: 100%;
         }
-
         .nav-links a:hover,
         .nav-links a.active {
-            color: var(--gold);
+            color: var(--bright-gold);
         }
-
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .menu-toggle span {
+            width: 30px;
+            height: 2px;
+            background: var(--bright-gold);
+            transition: all 0.3s ease;
+        }
         /* Page Container */
         .page {
             display: none;
             min-height: 100vh;
             padding-top: 80px;
         }
-
         .page.active {
             display: block;
-            animation: fadeIn 0.6s ease;
+            animation: pageEnter 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        @keyframes fadeIn {
+        @keyframes pageEnter {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-
         /* Hero Section */
         .hero {
-            height: 90vh;
+            height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             position: relative;
-            background: linear-gradient(135deg, var(--black) 0%, var(--dark-gray) 100%);
+            background:
+                linear-gradient(135deg, rgba(13, 13, 13, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%),
+                radial-gradient(ellipse at top, rgba(218, 165, 32, 0.05) 0%, transparent 50%);
             overflow: hidden;
         }
-
         .hero::before {
             content: '';
             position: absolute;
@@ -141,380 +200,830 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
-                repeating-linear-gradient(
-                    90deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(212, 175, 55, 0.03) 2px,
-                    rgba(212, 175, 55, 0.03) 4px
-                );
+            background-image:
+                repeating-linear-gradient(90deg, transparent, transparent 1px, rgba(218, 165, 32, 0.02) 1px, rgba(218, 165, 32, 0.02) 2px),
+                repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(218, 165, 32, 0.02) 1px, rgba(218, 165, 32, 0.02) 2px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            animation: gridMove 20s linear infinite;
+        }
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(40px, 40px); }
+        }
+        .hero-ornament {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border: 1px solid rgba(218, 165, 32, 0.1);
+            border-radius: 50%;
             pointer-events: none;
         }
-
+        .hero-ornament:nth-child(1) {
+            top: -200px;
+            right: -200px;
+            animation: float 20s ease-in-out infinite;
+        }
+        .hero-ornament:nth-child(2) {
+            bottom: -300px;
+            left: -300px;
+            width: 800px;
+            height: 800px;
+            animation: float 25s ease-in-out infinite reverse;
+        }
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(30px, -30px) rotate(180deg); }
+        }
         .hero-content {
             position: relative;
             z-index: 1;
-            max-width: 900px;
+            max-width: 1100px;
             padding: 0 2rem;
         }
-
+        .hero-subtitle {
+            font-size: 0.95rem;
+            color: var(--bright-gold);
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
         .hero h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--off-white);
-            letter-spacing: 3px;
-            animation: slideUp 1s ease 0.2s both;
-        }
-
-        .hero .subtitle {
-            font-size: 1.2rem;
-            color: var(--gold);
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            font-weight: 300;
+            font-size: 6.5rem;
+            font-weight: 900;
             margin-bottom: 2rem;
-            animation: slideUp 1s ease 0.4s both;
+            color: var(--soft-white);
+            letter-spacing: 4px;
+            line-height: 1.1;
+            animation: fadeInUp 1s ease 0.4s both;
+            text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.5);
         }
-
-        .hero p {
-            font-size: 1.1rem;
-            color: var(--light-gray);
-            margin-bottom: 3rem;
-            line-height: 1.8;
-            animation: slideUp 1s ease 0.6s both;
+        .hero h1 span {
+            display: block;
+            font-size: 3rem;
+            color: var(--bright-gold);
+            margin-top: 1rem;
+            font-weight: 400;
+            font-style: italic;
+            letter-spacing: 8px;
         }
-
-        @keyframes slideUp {
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--silver);
+            margin-bottom: 3.5rem;
+            line-height: 1.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease 0.6s both;
+            font-weight: 300;
+        }
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(40px);
+                transform: translateY(50px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            animation: fadeInUp 1s ease 0.8s both;
+        }
         .cta-button {
             display: inline-block;
-            padding: 1rem 3rem;
-            background: var(--gold);
-            color: var(--black);
+            padding: 1.3rem 3.5rem;
+            background: linear-gradient(135deg, var(--bright-gold), var(--deep-gold));
+            color: var(--rich-black);
             text-decoration: none;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            border: 2px solid var(--gold);
-            animation: slideUp 1s ease 0.8s both;
-        }
-
-        .cta-button:hover {
-            background: transparent;
-            color: var(--gold);
-            transform: translateY(-2px);
-        }
-
-        /* Section Styles */
-        .section {
-            padding: 6rem 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
             font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--gold);
-            letter-spacing: 2px;
-        }
-
-        .section-subtitle {
-            font-size: 1rem;
-            color: var(--light-gray);
-            margin-bottom: 4rem;
             letter-spacing: 2px;
             text-transform: uppercase;
-        }
-
-        /* Services Grid */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-            margin-top: 3rem;
-        }
-
-        .service-card {
-            background: var(--dark-gray);
-            padding: 3rem 2rem;
-            border: 1px solid var(--medium-gray);
-            transition: all 0.4s ease;
+            font-size: 0.85rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid var(--bright-gold);
             position: relative;
             overflow: hidden;
+            z-index: 1;
         }
-
-        .service-card::before {
+        .cta-button::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
             transition: left 0.6s ease;
+            z-index: -1;
         }
-
-        .service-card:hover::before {
+        .cta-button:hover::before {
             left: 100%;
         }
-
-        .service-card:hover {
-            border-color: var(--gold);
-            transform: translateY(-5px);
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(218, 165, 32, 0.4);
         }
-
+        .cta-button.secondary {
+            background: transparent;
+            color: var(--bright-gold);
+            border: 2px solid var(--bright-gold);
+        }
+        .cta-button.secondary:hover {
+            background: var(--bright-gold);
+            color: var(--rich-black);
+        }
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        .scroll-indicator span {
+            display: block;
+            width: 2px;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--bright-gold), transparent);
+            margin: 0 auto 0.5rem;
+        }
+        .scroll-indicator p {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            color: var(--silver);
+            text-transform: uppercase;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(15px); }
+        }
+        /* Section Styles */
+        .section {
+            padding: 8rem 6%;
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+        .section-label {
+            font-size: 0.85rem;
+            color: var(--bright-gold);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            position: relative;
+        }
+        .section-label::before,
+        .section-label::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40px;
+            height: 1px;
+            background: var(--bright-gold);
+        }
+        .section-label::before {
+            right: calc(100% + 15px);
+        }
+        .section-label::after {
+            left: calc(100% + 15px);
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            color: var(--soft-white);
+            letter-spacing: 2px;
+            line-height: 1.2;
+        }
+        .section-description {
+            font-size: 1.15rem;
+            color: var(--silver);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+        /* Feature Cards */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+        .feature-card {
+            background: linear-gradient(135deg, var(--deep-charcoal) 0%, var(--charcoal) 100%);
+            padding: 3.5rem 2.5rem;
+            border: 1px solid rgba(218, 165, 32, 0.15);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--bright-gold), var(--copper), var(--bright-gold));
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: -1;
+        }
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(218, 165, 32, 0.2);
+        }
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--bright-gold), var(--deep-gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: var(--rich-black);
+            font-weight: bold;
+        }
+        .feature-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.9rem;
+            margin-bottom: 1.3rem;
+            color: var(--soft-white);
+            font-weight: 700;
+        }
+        .feature-card p {
+            color: var(--silver);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+        .service-card {
+            background: linear-gradient(135deg, var(--deep-charcoal) 0%, var(--charcoal) 100%);
+            padding: 3rem 2.5rem;
+            border: 1px solid rgba(218, 165, 32, 0.1);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(218, 165, 32, 0.1), transparent);
+            transition: left 0.7s ease;
+        }
+        .service-card:hover::after {
+            left: 100%;
+        }
+        .service-card:hover {
+            border-color: var(--bright-gold);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+        }
+        .service-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: rgba(218, 165, 32, 0.1);
+            font-weight: 900;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            line-height: 1;
+        }
         .service-card h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: var(--off-white);
+            font-size: 2rem;
+            margin-bottom: 1.2rem;
+            color: var(--bright-gold);
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
         }
-
         .service-card p {
-            color: var(--light-gray);
-            margin-bottom: 1.5rem;
+            color: var(--silver);
+            margin-bottom: 2rem;
             line-height: 1.8;
+            font-size: 1rem;
         }
-
+        .service-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(218, 165, 32, 0.2);
+        }
         .service-price {
-            font-size: 1.5rem;
-            color: var(--gold);
+            font-size: 2rem;
+            color: var(--bright-gold);
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+        }
+        .service-duration {
+            font-size: 0.9rem;
+            color: var(--silver);
+            letter-spacing: 1px;
+        }
+        /* Testimonials Section - FIXED */
+        .testimonials-section {
+            background: linear-gradient(135deg, var(--deep-charcoal) 0%, var(--rich-black) 100%);
+            padding: 6rem 6%;
+            position: relative;
+            overflow: hidden;
+        }
+        .reviews-carousel-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .reviews-carousel {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding: 2rem 0;
+            scroll-padding: 0 20px;
+        }
+        .reviews-carousel::-webkit-scrollbar {
+            display: none;
+        }
+        .review-card {
+            min-width: 340px;
+            max-width: 340px;
+            background: var(--charcoal);
+            padding: 2.5rem;
+            border: 1px solid rgba(218, 165, 32, 0.2);
+            border-radius: 8px;
+            position: relative;
+            transition: all 0.4s ease;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        .review-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--bright-gold);
+            box-shadow: 0 12px 40px rgba(218, 165, 32, 0.15);
+        }
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .review-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--bright-gold), var(--deep-gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--rich-black);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .review-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .review-author-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .review-author {
             font-weight: 600;
+            color: var(--soft-white);
+            font-size: 1.05rem;
+            margin-bottom: 0.3rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .review-date {
+            font-size: 0.85rem;
+            color: var(--silver);
+        }
+        .review-stars {
+            color: var(--bright-gold);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+        }
+        .review-text {
+            font-size: 1rem;
+            color: var(--silver);
+            line-height: 1.7;
+            font-style: italic;
+            flex: 1;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 6;
+            -webkit-box-orient: vertical;
+        }
+        .review-verified {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--bright-gold);
+            opacity: 0.8;
+        }
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--bright-gold);
+            color: var(--rich-black);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            border: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        .carousel-nav:hover {
+            background: var(--deep-gold);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 20px rgba(218, 165, 32, 0.3);
+        }
+        .carousel-nav.prev {
+            left: 0;
+        }
+        .carousel-nav.next {
+            right: 0;
+        }
+        .reviews-loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--silver);
+            font-size: 1.1rem;
+        }
+        .google-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-top: 3rem;
+            padding: 1rem 2rem;
+            background: rgba(218, 165, 32, 0.1);
+            border: 1px solid rgba(218, 165, 32, 0.3);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .google-badge:hover {
+            background: rgba(218, 165, 32, 0.15);
+            transform: translateY(-2px);
+        }
+        .google-badge img {
+            height: 30px;
+        }
+        .google-badge-text {
+            display: flex;
+            flex-direction: column;
+        }
+        .google-rating {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--bright-gold);
+        }
+        .google-reviews-count {
+            font-size: 0.85rem;
+            color: var(--silver);
         }
 
+        /* Responsive adjustments */
+        @media (max-width: 968px) {
+            .reviews-carousel-container {
+                padding: 0 40px;
+            }
+            .review-card {
+                min-width: 300px;
+                max-width: 300px;
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .reviews-carousel-container {
+                padding: 0 20px;
+            }
+            .review-card {
+                min-width: 280px;
+                max-width: 280px;
+                padding: 1.5rem;
+            }
+            .review-text {
+                font-size: 0.95rem;
+                -webkit-line-clamp: 5;
+            }
+        }
         /* Gallery Grid */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
         }
-
         .gallery-item {
             aspect-ratio: 1;
-            background: var(--medium-gray);
+            background: linear-gradient(135deg, var(--charcoal), var(--warm-gray));
             position: relative;
             overflow: hidden;
-            border: 1px solid var(--medium-gray);
+            border: 1px solid rgba(218, 165, 32, 0.2);
             cursor: pointer;
+            transition: all 0.4s ease;
         }
-
         .gallery-item::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(10, 10, 10, 0.8));
+            background: linear-gradient(135deg, rgba(218, 165, 32, 0.4), rgba(184, 115, 51, 0.4));
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.4s ease;
             z-index: 1;
         }
-
         .gallery-item:hover::before {
             opacity: 1;
         }
-
-        /* Team Grid */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 3rem;
-            margin-top: 3rem;
+        .gallery-item:hover {
+            transform: scale(1.05);
+            z-index: 2;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
-
-        .team-member {
-            text-align: center;
-        }
-
-        .team-photo {
-            width: 100%;
-            aspect-ratio: 3/4;
-            background: var(--medium-gray);
-            margin-bottom: 1.5rem;
-            border: 1px solid var(--medium-gray);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .team-photo::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, transparent 50%, rgba(212, 175, 55, 0.1));
-        }
-
-        .team-member h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--off-white);
-        }
-
-        .team-member .role {
-            color: var(--gold);
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-        }
-
-        .team-member p {
-            color: var(--light-gray);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* Contact Form */
-        .contact-content {
+        /* Contact Section */
+        .contact-wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            margin-top: 3rem;
+            gap: 5rem;
+            margin-top: 4rem;
+            align-items: start;
         }
-
-        .contact-info h3 {
+        .contact-info-section h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            color: var(--gold);
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--bright-gold);
+            font-weight: 700;
         }
-
-        .info-item {
-            margin-bottom: 2rem;
+        .info-block {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--deep-charcoal);
+            border-left: 3px solid var(--bright-gold);
         }
-
-        .info-item h4 {
-            font-size: 0.9rem;
-            letter-spacing: 2px;
+        .info-block h4 {
+            font-size: 0.85rem;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            color: var(--light-gray);
-            margin-bottom: 0.5rem;
+            color: var(--bright-gold);
+            margin-bottom: 1rem;
+            font-weight: 600;
         }
-
-        .info-item p {
-            color: var(--off-white);
-            font-size: 1.1rem;
+        .info-block p {
+            color: var(--silver);
+            font-size: 1.05rem;
+            line-height: 1.8;
         }
-
+        .info-block a {
+            color: var(--bright-gold);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .info-block a:hover {
+            color: var(--deep-gold);
+        }
         .contact-form {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 2rem;
+            background: var(--deep-charcoal);
+            padding: 3rem;
+            border: 1px solid rgba(218, 165, 32, 0.2);
         }
-
         .form-group {
             display: flex;
             flex-direction: column;
         }
-
         .form-group label {
-            font-size: 0.85rem;
-            letter-spacing: 1px;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            color: var(--light-gray);
-            margin-bottom: 0.5rem;
+            color: var(--bright-gold);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
         }
-
         .form-group input,
         .form-group textarea {
-            padding: 1rem;
-            background: var(--dark-gray);
-            border: 1px solid var(--medium-gray);
-            color: var(--off-white);
+            padding: 1.2rem;
+            background: var(--charcoal);
+            border: 1px solid rgba(218, 165, 32, 0.2);
+            color: var(--soft-white);
             font-family: 'Montserrat', sans-serif;
             font-size: 1rem;
-            transition: border-color 0.3s ease;
+            transition: all 0.3s ease;
         }
-
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--gold);
+            border-color: var(--bright-gold);
+            background: var(--deep-charcoal);
+            box-shadow: 0 0 0 3px rgba(218, 165, 32, 0.1);
         }
-
         .form-group textarea {
-            min-height: 150px;
+            min-height: 180px;
             resize: vertical;
         }
-
         .submit-btn {
-            padding: 1rem 3rem;
-            background: var(--gold);
-            color: var(--black);
-            border: 2px solid var(--gold);
-            font-weight: 600;
+            padding: 1.3rem 3rem;
+            background: linear-gradient(135deg, var(--bright-gold), var(--deep-gold));
+            color: var(--rich-black);
+            border: none;
+            font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             align-self: flex-start;
         }
-
         .submit-btn:hover {
-            background: transparent;
-            color: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(218, 165, 32, 0.4);
         }
-
         /* Footer */
         footer {
-            background: var(--dark-gray);
-            padding: 3rem 5%;
+            background: var(--deep-charcoal);
+            padding: 4rem 6%;
+            border-top: 1px solid rgba(218, 165, 32, 0.2);
+            margin-top: 6rem;
+        }
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+        }
+        .footer-brand h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--bright-gold);
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+        .footer-brand p {
+            color: var(--silver);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+        .footer-section h4 {
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--bright-gold);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+        .footer-section ul {
+            list-style: none;
+        }
+        .footer-section ul li {
+            margin-bottom: 1rem;
+        }
+        .footer-section ul li a {
+            color: var(--silver);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .footer-section ul li a:hover {
+            color: var(--bright-gold);
+        }
+        .footer-bottom {
             text-align: center;
-            border-top: 1px solid var(--medium-gray);
-            margin-top: 4rem;
-        }
-
-        footer p {
-            color: var(--light-gray);
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(218, 165, 32, 0.1);
+            color: var(--silver);
             font-size: 0.9rem;
-            letter-spacing: 1px;
         }
-
         /* Loading State */
         .loading {
             text-align: center;
-            padding: 2rem;
-            color: var(--light-gray);
+            padding: 3rem;
+            color: var(--silver);
+            font-size: 1.1rem;
         }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                gap: 1.5rem;
-            }
-
+        /* Responsive Design */
+        @media (max-width: 1200px) {
             .hero h1 {
+                font-size: 5rem;
+            }
+            .section-title {
                 font-size: 3rem;
             }
-
-            .section-title {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 968px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(13, 13, 13, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                transition: left 0.4s ease;
+            }
+            .nav-links.active {
+                left: 0;
+            }
+            .menu-toggle {
+                display: flex;
+            }
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            .hero h1 span {
                 font-size: 2rem;
             }
-
-            .contact-content {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .footer-content {
                 grid-template-columns: 1fr;
                 gap: 3rem;
             }
-
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .section-title {
+                font-size: 2.2rem;
+            }
+            .section {
+                padding: 5rem 5%;
+            }
             .services-grid,
-            .team-grid {
+            .gallery-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -522,66 +1031,112 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav>
+    <nav id="mainNav">
         <div class="nav-container">
-            <a href="#" class="logo" data-page="home">FIRST CLASS TURKISH BARBER</a>
-            <ul class="nav-links">
+            <a href="#" class="logo" data-page="home">FIRST CLASS</a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#" class="active" data-page="home">Home</a></li>
                 <li><a href="#" data-page="services">Services</a></li>
                 <li><a href="#" data-page="gallery">Gallery</a></li>
-                <li><a href="#" data-page="team">Team</a></li>
                 <li><a href="#" data-page="contact">Contact</a></li>
             </ul>
         </div>
     </nav>
-
     <!-- Home Page -->
     <div class="page active" id="home">
         <section class="hero">
+            <div class="hero-ornament"></div>
+            <div class="hero-ornament"></div>
             <div class="hero-content">
-                <h1>FIRST CLASS TURKISH BARBER</h1>
-                <div class="subtitle">Edinburgh</div>
-                <p>Premium Turkish barbering located at 65 Broughton Street, EH1 3RJ. Experience traditional cuts and hot shaves with expert service.</p>
-                <a href="#" class="cta-button" data-page="services">View Services</a>
+                <div class="hero-subtitle">Edinburgh's Premier Turkish Barber</div>
+                <h1>FIRST CLASS<span>Turkish Barber</span></h1>
+                <p class="hero-description" id="hero-description">Premium Turkish barbering located in Broughton Street. Experience traditional cuts, hot towel shaves, and expert beard trims.</p>
+                <div class="cta-buttons">
+                    <a href="#" class="cta-button" data-page="services">View Services</a>
+                    <a href="#" class="cta-button secondary" data-page="contact">Book Now</a>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <span></span>
+                <p>Scroll</p>
             </div>
         </section>
-
         <section class="section">
-            <h2 class="section-title">The Experience</h2>
-            <p class="section-subtitle">Traditional Excellence</p>
-            <div class="services-grid">
-                <div class="service-card">
+            <div class="section-header">
+                <div class="section-label">What We Offer</div>
+                <h2 class="section-title">Traditional Excellence</h2>
+                <p class="section-description">Experience the authentic art of Turkish barbering with services that combine centuries-old techniques with modern precision.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">✂</div>
                     <h3>Precision Cuts</h3>
-                    <p>Expert haircuts using traditional Turkish barbering techniques, tailored to your style and facial structure.</p>
+                    <p>Expert haircuts using traditional Turkish barbering techniques, tailored to your style and facial structure. From classic cuts to modern fades, each style is crafted with meticulous attention to detail.</p>
                 </div>
-                <div class="service-card">
-                    <h3>Luxury Shaves</h3>
-                    <p>Authentic hot towel wet shaves and hot shaves that leave your skin feeling refreshed and smooth.</p>
+                <div class="feature-card">
+                    <div class="feature-icon">🔥</div>
+                    <h3>Luxury Hot Shaves</h3>
+                    <p>Authentic hot towel wet shaves and straight razor shaves that leave your skin feeling refreshed and smooth. Experience the ultimate in relaxation and grooming luxury.</p>
                 </div>
-                <div class="service-card">
-                    <h3>Beard Care</h3>
-                    <p>Professional beard trims and sculpting to maintain a sharp, well-groomed appearance.</p>
+                <div class="feature-card">
+                    <div class="feature-icon">💈</div>
+                    <h3>Beard Mastery</h3>
+                    <p>Professional beard trims, shaping, and grooming services including nose waxing for a sharp, clean look. Maintain your beard's perfect shape with expert precision.</p>
                 </div>
+            </div>
+        </section>
+        <section class="testimonials-section">
+            <div class="section-header">
+                <div class="section-label">Client Reviews</div>
+                <h2 class="section-title">What Our Clients Say</h2>
+                <div class="google-badge">
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                    </svg>
+                    <div class="google-badge-text">
+                        <div class="google-rating" id="googleRating">4.8</div>
+                        <div class="google-reviews-count" id="googleReviewsCount">Google Reviews</div>
+                    </div>
+                </div>
+            </div>
+            <div class="reviews-carousel-container">
+                <button class="carousel-nav prev" id="prevBtn">‹</button>
+                <div class="reviews-carousel" id="reviewsCarousel">
+                    <div class="reviews-loading">Loading reviews from Google...</div>
+                </div>
+                <button class="carousel-nav next" id="nextBtn">›</button>
             </div>
         </section>
     </div>
-
     <!-- Services Page -->
     <div class="page" id="services">
         <section class="section">
-            <h2 class="section-title">Our Services</h2>
-            <p class="section-subtitle">Pricing & Details</p>
+            <div class="section-header">
+                <div class="section-label">Our Menu</div>
+                <h2 class="section-title">Premium Services</h2>
+                <p class="section-description">From classic cuts to luxury grooming packages, discover our full range of professional barbering services.</p>
+            </div>
             <div class="services-grid" id="servicesContainer">
                 <div class="loading">Loading services...</div>
             </div>
         </section>
     </div>
-
     <!-- Gallery Page -->
     <div class="page" id="gallery">
         <section class="section">
-            <h2 class="section-title">Our Work</h2>
-            <p class="section-subtitle">Portfolio</p>
+            <div class="section-header">
+                <div class="section-label">Gallery</div>
+                <h2 class="section-title">Our Work</h2>
+                <p class="section-description">Browse through our collection of precision cuts, styling, and transformations.</p>
+            </div>
             <div class="gallery-grid">
                 <div class="gallery-item"></div>
                 <div class="gallery-item"></div>
@@ -595,107 +1150,331 @@
             </div>
         </section>
     </div>
-
-    <!-- Team Page -->
-    <div class="page" id="team">
-        <section class="section">
-            <h2 class="section-title">Our Barbers</h2>
-            <p class="section-subtitle">Meet the Team</p>
-            <div class="team-grid">
-                <div class="team-member">
-                    <div class="team-photo"></div>
-                    <h3>Barber 1</h3>
-                    <div class="role">Master Barber</div>
-                    <p>Skilled Barber</p>
-                </div>
-                <div class="team-member">
-                    <div class="team-photo"></div>
-                    <h3>Barber 2</h3>
-                    <div class="role">Senior Barber</div>
-                    <p>Skilled Barber</p>
-                </div>
-                <div class="team-member">
-                    <div class="team-photo"></div>
-                    <h3>Barber 3</h3>
-                    <div class="role">Barber</div>
-                    <p>Skilled Barber</p>
-                </div>
-            </div>
-        </section>
-    </div>
-
     <!-- Contact Page -->
     <div class="page" id="contact">
         <section class="section">
-            <h2 class="section-title">Visit Us</h2>
-            <p class="section-subtitle">Get In Touch</p>
-            <div class="contact-content">
-                <div class="contact-info">
+            <div class="section-header">
+                <div class="section-label">Get In Touch</div>
+                <h2 class="section-title">Visit Us</h2>
+                <p class="section-description">Located in the heart of Edinburgh. Walk-ins welcome or book ahead online.</p>
+            </div>
+            <div class="contact-wrapper">
+                <div class="contact-info-section">
                     <h3>First Class Turkish Barber</h3>
-                    <div class="info-item">
+                    <div class="info-block">
                         <h4>Address</h4>
                         <p id="addressInfo">Loading...</p>
                     </div>
-                    <div class="info-item">
-                        <h4>Contact</h4>
+                    <div class="info-block">
+                        <h4>Contact & Booking</h4>
                         <p id="contactInfo">Loading...</p>
                     </div>
-                    <div class="info-item">
-                        <h4>Hours</h4>
+                    <div class="info-block">
+                        <h4>Opening Hours</h4>
                         <p id="hoursInfo">Loading...</p>
                     </div>
-                    <div class="info-item">
+                    <div class="info-block">
                         <h4>Amenities</h4>
                         <p id="amenitiesInfo">Loading...</p>
                     </div>
                 </div>
-                <form class="contact-form">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone</label>
-                        <input type="tel" id="phone" name="phone">
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn">Send Message</button>
-                </form>
             </div>
         </section>
     </div>
-
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 First Class Turkish Barber Edinburgh. All rights reserved.</p>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>FIRST CLASS</h3>
+                <p>Edinburgh's premier destination for traditional Turkish barbering. Experience the perfect blend of heritage techniques and modern style in the heart of the city.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#" data-page="services">Services</a></li>
+                    <li><a href="#" data-page="gallery">Gallery</a></li>
+                    <li><a href="#" data-page="contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Location</h4>
+                <ul>
+                    <li>65 Broughton Street</li>
+                    <li>Edinburgh, EH1 3RJ</li>
+                    <li>Scotland, UK</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year">2025</span> First Class Turkish Barber Edinburgh. All rights reserved.</p>
+        </div>
     </footer>
-
     <script>
-        // Google Sheets URLs
-        const SHEET_BASE_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQG61CYkYWoT_Y9zr9E06wBSYbDDRnSjqJFdkZGpm6aq3_hqb3QxCk9MhWgUya4KfRcy7cz8ccCeUHX';
-        
-        const SERVICES_URL = `${SHEET_BASE_URL}/pub?gid=0&single=true&output=csv`;
-        const HOURS_URL = `${SHEET_BASE_URL}/pub?gid=2079487819&single=true&output=csv`;
-        const INFO_URL = `${SHEET_BASE_URL}/pub?gid=1335848551&single=true&output=csv`;
-
-        // Parse CSV data
+        // ============================================
+        // GOOGLE PLACES API CONFIGURATION
+        // ============================================
+        // IMPORTANT: Replace with your actual Google Places API key
+        // Get one at: https://console.cloud.google.com/google/maps-apis/credentials
+        const GOOGLE_API_KEY = 'YOUR_API_KEY_HERE'; // <-- PUT YOUR API KEY HERE
+        // Place ID for First Class Turkish Barber Edinburgh
+        // This is the unique identifier for your business on Google Maps
+        const PLACE_ID = 'ChIJC21U8X_FnEcRmNmAQ95JkCw'; // This may need to be updated with the correct Place ID
+        // Check if we're running locally
+        const isLocal = window.location.protocol === 'file:' ||
+                       window.location.hostname === 'localhost' ||
+                       window.location.hostname === '127.0.0.1';
+        // Mock data for local development
+        if (isLocal) {
+            console.log('Running in local development mode - using mock data');
+            const mockData = {
+                services: [
+                    { service_name: "Hair cut", price: "20.00", duration: "30min", description: "Classic haircut with precision styling and expert finishing" },
+                    { service_name: "Skin fade", price: "20.00", duration: "30min", description: "Sharp skin fade with clean lines and perfect blending" },
+                    { service_name: "Hair cut & hot shave", price: "35.00", duration: "40min", description: "Complete grooming experience with haircut and hot towel shave" },
+                    { service_name: "Wet shave hot towel", price: "20.00", duration: "30min", description: "Traditional hot towel shave for a smooth, refreshed finish" },
+                    { service_name: "Beard trim", price: "15.00", duration: "30min", description: "Precision beard trimming and shaping to perfection" },
+                    { service_name: "Buzz cut", price: "20.00", duration: "20min", description: "Classic buzz cut for a clean, uniform look" },
+                    { service_name: "Clippers cut", price: "15.00", duration: "20min", description: "Simple clipper cut for a quick, fresh style" },
+                    { service_name: "Kids", price: "15.00", duration: "20min", description: "Professional haircut for children in a friendly environment" },
+                    { service_name: "Pensioner", price: "15.00", duration: "30min", description: "Special pricing for senior citizens" },
+                    { service_name: "Nose waxing", price: "5.00", duration: "5min", description: "Professional nose hair removal service" },
+                    { service_name: "Full service", price: "40.00", duration: "30min", description: "Complete grooming package with all the essentials" }
+                ],
+                hours: [
+                    { day: "Monday", open: "9:00 AM", close: "8:00 PM" },
+                    { day: "Tuesday", open: "9:00 AM", close: "8:00 PM" },
+                    { day: "Wednesday", open: "9:00 AM", close: "8:00 PM" },
+                    { day: "Thursday", open: "9:00 AM", close: "8:00 PM" },
+                    { day: "Friday", open: "9:00 AM", close: "8:00 PM" },
+                    { day: "Saturday", open: "9:00 AM", close: "8:00 PM" },
+                    { day: "Sunday", open: "9:00 AM", close: "8:00 PM" }
+                ],
+                info: [
+                    { field: "hero_description", value: "Premium Turkish barbering located in Broughton Street. Experience traditional cuts, hot towel shaves, and expert beard trims." },
+                    { field: "address_line1", value: "65 Broughton Street" },
+                    { field: "address_line2", value: "Edinburgh" },
+                    { field: "postcode", value: "EH1 3RJ" },
+                    { field: "phone", value: "" },
+                    { field: "wifi", value: "Yes" },
+                    { field: "credit_cards", value: "Yes" },
+                    { field: "accessibility", value: "Yes" },
+                    { field: "child_friendly", value: "Yes" },
+                    { field: "pets_allowed", value: "Yes" }
+                ],
+                reviews: [
+                    {
+                        author_name: "Michael Thompson",
+                        rating: 5,
+                        text: "First Class lives up to its name. Best barber in Edinburgh, hands down. I won't go anywhere else for my haircuts now.",
+                        time: 1702857600, // Dec 17, 2023
+                        profile_photo_url: ""
+                    },
+                    {
+                        author_name: "Andrew Wilson",
+                        rating: 5,
+                        text: "Outstanding service every single time. The precision and care that goes into each cut is remarkable. Worth every penny.",
+                        time: 1702252800, // Dec 10, 2023
+                        profile_photo_url: ""
+                    },
+                    {
+                        author_name: "Robert Fraser",
+                        rating: 5,
+                        text: "Fantastic barber shop. Great atmosphere, skilled barbers, and always leave looking sharp. Can't recommend enough!",
+                        time: 1701648000, // Dec 3, 2023
+                        profile_photo_url: ""
+                    },
+                    {
+                        author_name: "Thomas Campbell",
+                        rating: 5,
+                        text: "Just had my first visit and it was exceptional. The barber took his time to understand what I wanted and delivered beyond expectations. The hot towel treatment was the cherry on top!",
+                        time: 1704672000, // Jan 7, 2024
+                        profile_photo_url: ""
+                    }
+                ]
+            };
+            window.loadCSV = async (url) => {
+                console.log(`Running locally, using mock data instead of fetching ${url}`);
+                if (url.includes('gid=0')) return mockData.services;
+                else if (url.includes('gid=2079487819')) return mockData.hours;
+                else if (url.includes('gid=1335848551')) return mockData.info;
+                return [];
+            };
+            window.mockReviews = mockData.reviews;
+        }
+        // ============================================
+        // GOOGLE REVIEWS FETCHING
+        // ============================================
+        async function loadGoogleReviews() {
+            const carousel = document.getElementById('reviewsCarousel');
+            // If running locally, use mock reviews
+            if (isLocal && window.mockReviews) {
+                displayReviews(window.mockReviews, 4.8, 155);
+                return;
+            }
+            // Check if API key is set
+            if (!GOOGLE_API_KEY || GOOGLE_API_KEY === 'YOUR_API_KEY_HERE') {
+                carousel.innerHTML = `
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">ℹ️</div>
+                            <div class="review-author-info">
+                                <div class="review-author">API Key Required</div>
+                                <div class="review-date">Setup Instructions</div>
+                            </div>
+                        </div>
+                        <div class="review-text">
+                            To display real Google reviews, please:<br><br>
+                            1. Get a Google Places API key from: <a href="https://console.cloud.google.com/" target="_blank" style="color: var(--bright-gold);">Google Cloud Console</a><br>
+                            2. Enable the Places API<br>
+                            3. Replace 'YOUR_API_KEY_HERE' in the code with your actual API key<br>
+                            4. Find your Place ID using the <a href="https://developers.google.com/maps/documentation/places/web-service/place-id" target="_blank" style="color: var(--bright-gold);">Place ID Finder</a>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            try {
+                // Load Google Maps Places library
+                const script = document.createElement('script');
+                script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&libraries=places&callback=initGooglePlaces`;
+                script.async = true;
+                script.defer = true;
+                document.head.appendChild(script);
+            } catch (error) {
+                console.error('Error loading Google Places API:', error);
+                carousel.innerHTML = '<div class="reviews-loading">Unable to load reviews. Please check your API key configuration.</div>';
+            }
+        }
+        // Initialize Google Places and fetch reviews
+        window.initGooglePlaces = function() {
+            const service = new google.maps.places.PlacesService(document.createElement('div'));
+            service.getDetails({
+                placeId: PLACE_ID,
+                fields: ['name', 'rating', 'user_ratings_total', 'reviews']
+            }, (place, status) => {
+                if (status === google.maps.places.PlacesServiceStatus.OK && place.reviews) {
+                    // Sort reviews by date (most recent first)
+                    const sortedReviews = [...place.reviews].sort((a, b) => b.time - a.time);
+                    // Take only the 4 most recent reviews
+                    const recentReviews = sortedReviews.slice(0, 4);
+                    displayReviews(recentReviews, place.rating, place.user_ratings_total);
+                } else {
+                    console.error('Places service error:', status);
+                    document.getElementById('reviewsCarousel').innerHTML =
+                        '<div class="reviews-loading">Unable to load reviews at this time.</div>';
+                }
+            });
+        };
+        // Display reviews in the carousel
+        function displayReviews(reviews, overallRating, totalReviews) {
+            const carousel = document.getElementById('reviewsCarousel');
+            // Update Google rating badge
+            document.getElementById('googleRating').textContent = overallRating.toFixed(1);
+            document.getElementById('googleReviewsCount').textContent = `${totalReviews} Google Reviews`;
+            if (reviews.length === 0) {
+                carousel.innerHTML = '<div class="reviews-loading">No reviews available at this time.</div>';
+                return;
+            }
+            carousel.innerHTML = reviews.map(review => {
+                const date = new Date(review.time * 1000);
+                const formattedDate = date.toLocaleDateString('en-GB', { year: 'numeric', month: 'short' });
+                const initials = review.author_name.split(' ').map(n => n[0]).join('');
+                return `
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">
+                                ${review.profile_photo_url ?
+                                    `<img src="${review.profile_photo_url}" alt="${review.author_name}">` :
+                                    initials}
+                            </div>
+                            <div class="review-author-info">
+                                <div class="review-author">${review.author_name}</div>
+                                <div class="review-date">${formattedDate}</div>
+                            </div>
+                        </div>
+                        <div class="review-stars">${'★'.repeat(review.rating)}</div>
+                        <div class="review-text">${review.text}</div>
+                        <div class="review-verified">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                            </svg>
+                            Posted on Google
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            setupCarouselNavigation();
+        }
+        // Updated carousel navigation with proper sizing
+        function setupCarouselNavigation() {
+            const carousel = document.getElementById('reviewsCarousel');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            if (!carousel || !prevBtn || !nextBtn) return;
+            
+            // Calculate scroll amount based on card width + gap
+            const getScrollAmount = () => {
+                const firstCard = carousel.querySelector('.review-card');
+                if (!firstCard) return 360; // Fallback value
+                
+                const cardWidth = firstCard.offsetWidth;
+                const gap = parseInt(getComputedStyle(carousel).gap) || 32;
+                
+                return cardWidth + gap;
+            };
+            
+            prevBtn.addEventListener('click', () => {
+                carousel.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                carousel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+            });
+            
+            // Auto-scroll every 5 seconds
+            let autoScrollInterval = setInterval(() => {
+                if (carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 10) {
+                    carousel.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    carousel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+                }
+            }, 5000);
+            
+            // Pause auto-scroll on hover
+            carousel.addEventListener('mouseenter', () => {
+                clearInterval(autoScrollInterval);
+            });
+            
+            carousel.addEventListener('mouseleave', () => {
+                autoScrollInterval = setInterval(() => {
+                    if (carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 10) {
+                        carousel.scrollTo({ left: 0, behavior: 'smooth' });
+                    } else {
+                        carousel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+                    }
+                }, 5000);
+            });
+        }
+        // ============================================
+        // GOOGLE SHEETS DATA LOADING
+        // ============================================
+        const SHEET_ID = '2PACX-1vQG61CYkYWoT_Y9zr9E06wBSYbDDRnSjqJFdkZGpm6aq3_hqb3QxCk9MhWgUya4KfRcy7cz8ccCeUHX';
+        const SHEET_BASE_URL = `https://docs.google.com/spreadsheets/d/e/${SHEET_ID}/pub`;
+        const SERVICES_GID = '0';
+        const HOURS_GID = '2079487819';
+        const INFO_GID = '1335848551';
+        const SERVICES_URL = `${SHEET_BASE_URL}?gid=${SERVICES_GID}&single=true&output=csv`;
+        const HOURS_URL = `${SHEET_BASE_URL}?gid=${HOURS_GID}&single=true&output=csv`;
+        const INFO_URL = `${SHEET_BASE_URL}?gid=${INFO_GID}&single=true&output=csv`;
         async function loadCSV(url) {
             try {
                 const response = await fetch(url);
                 const text = await response.text();
                 const rows = text.trim().split('\n').map(row => {
-                    // Handle CSV with proper quote parsing
                     const result = [];
                     let current = '';
                     let inQuotes = false;
-                    
                     for (let i = 0; i < row.length; i++) {
                         const char = row[i];
                         if (char === '"') {
@@ -710,7 +1489,6 @@
                     result.push(current.trim());
                     return result;
                 });
-                
                 const headers = rows[0];
                 return rows.slice(1).filter(row => row.length > 1 && row[0]).map(row =>
                     Object.fromEntries(row.map((value, i) => [headers[i], value]))
@@ -720,103 +1498,169 @@
                 return [];
             }
         }
-
-        // Load and populate services
         async function loadServices() {
             const services = await loadCSV(SERVICES_URL);
             const container = document.getElementById('servicesContainer');
-            
             if (services.length === 0) {
-                container.innerHTML = '<p style="color: var(--light-gray); text-align: center;">Unable to load services. Please try again later.</p>';
+                container.innerHTML = '<p style="color: var(--silver); text-align: center;">Unable to load services. Please try again later.</p>';
                 return;
             }
-            
-            container.innerHTML = services.map(service => `
+            container.innerHTML = services.map((service, index) => `
                 <div class="service-card">
+                    <div class="service-number">${String(index + 1).padStart(2, '0')}</div>
                     <h3>${service.service_name || 'Service'}</h3>
                     <p>${service.description || ''}</p>
-                    <div class="service-price">£${service.price || '0'}</div>
+                    <div class="service-footer">
+                        <div class="service-price">£${service.price || '0'}</div>
+                        <div class="service-duration">${service.duration || ''}</div>
+                    </div>
                 </div>
             `).join('');
         }
-
-        // Load and populate hours
         async function loadHours() {
             const hours = await loadCSV(HOURS_URL);
             const hoursInfo = document.getElementById('hoursInfo');
-            
             if (hours.length === 0) {
                 hoursInfo.innerHTML = 'Hours information unavailable';
                 return;
             }
-            
-            hoursInfo.innerHTML = hours.map(day => 
-                `${day.day}: ${day.open} - ${day.close}`
+            hoursInfo.innerHTML = hours.map(day =>
+                `<strong>${day.day}:</strong> ${day.open} - ${day.close}`
             ).join('<br>');
         }
-
-        // Load and populate shop info
         async function loadShopInfo() {
             const info = await loadCSV(INFO_URL);
-            
             if (info.length === 0) {
                 document.getElementById('addressInfo').innerHTML = 'Address information unavailable';
                 document.getElementById('contactInfo').innerHTML = 'Contact information unavailable';
                 document.getElementById('amenitiesInfo').innerHTML = 'Amenities information unavailable';
                 return;
             }
-            
-            // Convert array to object
             const infoObj = {};
             info.forEach(item => {
                 infoObj[item.field] = item.value;
             });
-            
-            // Populate address
             const addressInfo = document.getElementById('addressInfo');
             addressInfo.innerHTML = `${infoObj.address_line1 || ''}<br>${infoObj.address_line2 || ''}<br>${infoObj.postcode || ''}`;
-            
-            // Populate contact
             const contactInfo = document.getElementById('contactInfo');
-            contactInfo.innerHTML = `Phone: ${infoObj.phone || 'N/A'}<br>Booking: ${infoObj.booking || 'N/A'}`;
-            
-            // Populate amenities
+            contactInfo.innerHTML = `${infoObj.phone ? `Phone: ${infoObj.phone}<br>` : ''}Book online: <a href="https://booksy.com/en-gb/136838_first-class-turkish-barber_barber_1576586_edinburgh" target="_blank">Booksy Booking</a>`;
             const amenitiesInfo = document.getElementById('amenitiesInfo');
             const amenities = [];
-            if (infoObj.wifi === 'Yes') amenities.push('Wi-Fi available');
-            if (infoObj.credit_cards === 'Yes') amenities.push('Credit cards accepted');
-            if (infoObj.accessibility === 'Yes') amenities.push('Accessible for people with disabilities');
-            if (infoObj.child_friendly === 'Yes') amenities.push('Child-friendly environment');
-            
+            if (infoObj.wifi === 'Yes') amenities.push('✓ Wi-Fi available');
+            if (infoObj.credit_cards === 'Yes') amenities.push('✓ Credit cards accepted');
+            if (infoObj.accessibility === 'Yes') amenities.push('✓ Wheelchair accessible');
+            if (infoObj.child_friendly === 'Yes') amenities.push('✓ Child-friendly');
+            if (infoObj.pets_allowed === 'Yes') amenities.push('✓ Pets welcome');
             amenitiesInfo.innerHTML = amenities.join('<br>');
+            if (infoObj.barber_name) {
+                document.getElementById('barber-name').textContent = infoObj.barber_name;
+                document.getElementById('barber-description').textContent = infoObj.barber_description ||
+                    'Highly rated by customers as providing "5 star service" and "the best haircut I\'ve ever had." Specializes in precision cuts, hot shaves, and traditional Turkish barbering.';
+            }
+            if (infoObj.hero_description) {
+                document.getElementById('hero-description').textContent = infoObj.hero_description;
+            }
         }
-
-        // Load all data
+        async function updateSchemaData() {
+            try {
+                const [info, hours] = await Promise.all([
+                    loadCSV(INFO_URL),
+                    loadCSV(HOURS_URL)
+                ]);
+                const infoObj = {};
+                info.forEach(item => {
+                    infoObj[item.field] = item.value;
+                });
+                const amenities = [];
+                if (infoObj.wifi === 'Yes') amenities.push('Wi-Fi');
+                if (infoObj.credit_cards === 'Yes') amenities.push('Credit cards accepted');
+                if (infoObj.accessibility === 'Yes') amenities.push('Accessible for people with disabilities');
+                if (infoObj.child_friendly === 'Yes') amenities.push('Child-friendly');
+                if (infoObj.pets_allowed === 'Yes') amenities.push('Pets allowed');
+                const schemaData = {
+                    "@context": "https://schema.org",
+                    "@type": "Barbershop",
+                    "name": "First Class Turkish Barber",
+                    "image": "images/barber-shop-interior.jpg",
+                    "url": window.location.href,
+                    "telephone": infoObj.phone || "+44-XXX-XXXXXXX",
+                    "address": {
+                        "@type": "PostalAddress",
+                        "streetAddress": infoObj.address_line1,
+                        "addressLocality": "Edinburgh",
+                        "postalCode": infoObj.postcode,
+                        "addressCountry": "UK"
+                    },
+                    "openingHoursSpecification": hours.map(day => ({
+                        "@type": "OpeningHoursSpecification",
+                        "dayOfWeek": day.day,
+                        "opens": day.open,
+                        "closes": day.close
+                    })),
+                    "priceRange": "£5–£40",
+                    "servesCuisine": "Turkish barbering",
+                    "amenityFeature": amenities.map(name => ({
+                        "@type": "LocationFeature",
+                        "name": name
+                    })),
+                    "sameAs": [
+                        "https://booksy.com/en-gb/136838_first-class-turkish-barber_barber_1576586_edinburgh"
+                    ]
+                };
+                const schemaScript = document.getElementById('dynamic-schema');
+                if (schemaScript) {
+                    schemaScript.textContent = JSON.stringify(schemaData, null, 2);
+                }
+                return schemaData;
+            } catch (error) {
+                console.error('Error updating schema ', error);
+                return null;
+            }
+        }
         async function loadAllData() {
-            await Promise.all([
-                loadServices(),
-                loadHours(),
-                loadShopInfo()
-            ]);
+            try {
+                await Promise.all([
+                    loadServices(),
+                    loadHours(),
+                    loadShopInfo(),
+                    loadGoogleReviews()
+                ]);
+                await updateSchemaData();
+                document.getElementById('current-year').textContent = new Date().getFullYear();
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('addressInfo').innerHTML = '65 Broughton Street<br>Edinburgh<br>EH1 3RJ';
+                document.getElementById('contactInfo').innerHTML = 'Book online: <a href="https://booksy.com/en-gb/136838_first-class-turkish-barber_barber_1576586_edinburgh" target="_blank">Booksy Booking</a>';
+                document.getElementById('hoursInfo').innerHTML = '<strong>Monday - Sunday:</strong> 9:00 AM - 8:00 PM';
+                document.getElementById('amenitiesInfo').innerHTML = '✓ Wi-Fi available<br>✓ Credit cards accepted<br>✓ Wheelchair accessible<br>✓ Pets welcome<br>✓ Child-friendly';
+            }
         }
-
-        // Initialize on page load
-        loadAllData();
-
+        document.addEventListener('DOMContentLoaded', loadAllData);
+        // Navigation scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('mainNav');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
         // Page Navigation
-        const navLinks = document.querySelectorAll('[data-page]');
+        const allNavLinks = document.querySelectorAll('[data-page]');
         const pages = document.querySelectorAll('.page');
-
-        navLinks.forEach(link => {
+        allNavLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const targetPage = link.getAttribute('data-page');
-
-                // Update active states
-                navLinks.forEach(l => l.classList.remove('active'));
+                navLinks.classList.remove('active');
+                allNavLinks.forEach(l => l.classList.remove('active'));
                 link.classList.add('active');
-
-                // Show target page
                 pages.forEach(page => {
                     page.classList.remove('active');
                     if (page.id === targetPage) {
@@ -826,12 +1670,18 @@
                 });
             });
         });
-
         // Form Submission
         document.querySelector('.contact-form').addEventListener('submit', (e) => {
             e.preventDefault();
             alert('Thank you for your message! We will get back to you shortly.');
             e.target.reset();
+        });
+        // Smooth scroll for scroll indicator
+        document.querySelector('.scroll-indicator')?.addEventListener('click', () => {
+            window.scrollTo({
+                top: window.innerHeight,
+                behavior: 'smooth'
+            });
         });
     </script>
 </body>
