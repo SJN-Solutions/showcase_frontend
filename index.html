@@ -658,7 +658,7 @@
             -webkit-box-orient: vertical;
         }
         .review-verified {
-            display: inline-flex;
+            display: block;
             align-items: center;
             gap: 0.5rem;
             margin-top: 1.5rem;
@@ -1053,7 +1053,7 @@
             <div class="hero-ornament"></div>
             <div class="hero-ornament"></div>
             <div class="hero-content">
-                <div class="hero-subtitle">Edinburgh's Premier Turkish Barber</div>
+                <div class="hero-subtitle">Turkish Barber in Central Edinburgh</div>
                 <h1>FIRST CLASS<span>Turkish Barber</span></h1>
                 <p class="hero-description" id="hero-description">Premium Turkish barbering located in Broughton Street. Experience traditional cuts, hot towel shaves, and expert beard trims.</p>
                 <div class="cta-buttons">
@@ -1092,8 +1092,8 @@
         </section>
         <section class="testimonials-section">
             <div class="section-header">
-                <div class="section-label">Client Reviews</div>
-                <h2 class="section-title">What Our Clients Say</h2>
+                <div class="section-label">Customer Reviews</div>
+                <h2 class="section-title">What Our Customers Say</h2>
                 <div class="google-badge">
                     <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
                         <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -1120,8 +1120,8 @@
     <div class="page" id="services">
         <section class="section">
             <div class="section-header">
-                <div class="section-label">Our Menu</div>
-                <h2 class="section-title">Premium Services</h2>
+                <div class="section-label">Premium Services</div>
+                <h2 class="section-title">Our Prices</h2>
                 <p class="section-description">From classic cuts to luxury grooming packages, discover our full range of professional barbering services.</p>
             </div>
             <div class="services-grid" id="servicesContainer">
@@ -1186,7 +1186,7 @@
         <div class="footer-content">
             <div class="footer-brand">
                 <h3>FIRST CLASS</h3>
-                <p>Edinburgh's premier destination for traditional Turkish barbering. Experience the perfect blend of heritage techniques and modern style in the heart of the city.</p>
+                <p>Traditional Turkish barbering in central Edinburgh. Experience the perfect blend of heritage techniques and modern style in the heart of the city.</p>
             </div>
             <div class="footer-section">
                 <h4>Quick Links</h4>
@@ -1317,7 +1317,6 @@
                     <div class="review-card">
                         <div class="review-header">
                             <div class="review-avatar">ℹ️</div>
-                            <div class="review-author-info">
                                 <div class="review-author">API Key Required</div>
                                 <div class="review-date">Setup Instructions</div>
                             </div>
@@ -1380,27 +1379,20 @@
                 const formattedDate = date.toLocaleDateString('en-GB', { year: 'numeric', month: 'short' });
                 const initials = review.author_name.split(' ').map(n => n[0]).join('');
                 return `
-                    <div class="review-card">
-                        <div class="review-header">
-                            <div class="review-avatar">
-                                ${review.profile_photo_url ?
-                                    `<img src="${review.profile_photo_url}" alt="${review.author_name}">` :
-                                    initials}
-                            </div>
-                            <div class="review-author-info">
-                                <div class="review-author">${review.author_name}</div>
-                                <div class="review-date">${formattedDate}</div>
-                            </div>
-                        </div>
-                        <div class="review-stars">${'★'.repeat(review.rating)}</div>
-                        <div class="review-text">${review.text}</div>
-                        <div class="review-verified">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                            </svg>
-                            Posted on Google
-                        </div>
-                    </div>
+              <div class="review-card">
+    <div class="review-header"></div>
+    <div class="review-stars">${'★'.repeat(review.rating)}</div>
+    <div class="review-text">${review.text}</div>
+
+    <div class="review-verified">
+  
+        <div>       <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+        </svg> Posted on Google</div>
+        <div class="review-date">${formattedDate}</div>
+    </div>
+</div>
+
                 `;
             }).join('');
             setupCarouselNavigation();
