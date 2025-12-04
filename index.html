@@ -553,7 +553,7 @@
             color: var(--silver);
             letter-spacing: 1px;
         }
-        /* Testimonials Section - FIXED */
+        /* Testimonials Section */
         .testimonials-section {
             background: linear-gradient(135deg, var(--deep-charcoal) 0%, var(--rich-black) 100%);
             padding: 6rem 6%;
@@ -735,32 +735,6 @@
             color: var(--silver);
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 968px) {
-            .reviews-carousel-container {
-                padding: 0 40px;
-            }
-            .review-card {
-                min-width: 300px;
-                max-width: 300px;
-                padding: 2rem;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .reviews-carousel-container {
-                padding: 0 20px;
-            }
-            .review-card {
-                min-width: 280px;
-                max-width: 280px;
-                padding: 1.5rem;
-            }
-            .review-text {
-                font-size: 0.95rem;
-                -webkit-line-clamp: 5;
-            }
-        }
         /* Gallery Grid */
         .gallery-grid {
             display: grid;
@@ -777,6 +751,12 @@
             cursor: pointer;
             transition: all 0.4s ease;
         }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
         .gallery-item::before {
             content: '';
             position: absolute;
@@ -788,6 +768,9 @@
         }
         .gallery-item:hover::before {
             opacity: 1;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
         }
         .gallery-item:hover {
             transform: scale(1.05);
@@ -1011,6 +994,14 @@
                 flex-direction: column;
                 gap: 1rem;
             }
+            .reviews-carousel-container {
+                padding: 0 40px;
+            }
+            .review-card {
+                min-width: 300px;
+                max-width: 300px;
+                padding: 2rem;
+            }
         }
         @media (max-width: 640px) {
             .hero h1 {
@@ -1025,6 +1016,18 @@
             .services-grid,
             .gallery-grid {
                 grid-template-columns: 1fr;
+            }
+            .reviews-carousel-container {
+                padding: 0 20px;
+            }
+            .review-card {
+                min-width: 280px;
+                max-width: 280px;
+                padding: 1.5rem;
+            }
+            .review-text {
+                font-size: 0.95rem;
+                -webkit-line-clamp: 5;
             }
         }
     </style>
@@ -1110,7 +1113,7 @@
             <div class="reviews-carousel-container">
                 <button class="carousel-nav prev" id="prevBtn">‹</button>
                 <div class="reviews-carousel" id="reviewsCarousel">
-                    <div class="reviews-loading">Loading reviews from Google...</div>
+                    <div class="reviews-loading">Loading reviews...</div>
                 </div>
                 <button class="carousel-nav next" id="nextBtn">›</button>
             </div>
@@ -1137,16 +1140,8 @@
                 <h2 class="section-title">Our Work</h2>
                 <p class="section-description">Browse through our collection of precision cuts, styling, and transformations.</p>
             </div>
-            <div class="gallery-grid">
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
+            <div class="gallery-grid" id="galleryContainer">
+                <div class="loading">Loading gallery...</div>
             </div>
         </section>
     </div>
@@ -1211,19 +1206,79 @@
     </footer>
     <script>
         // ============================================
-        // GOOGLE PLACES API CONFIGURATION
+        // STATIC GOOGLE REVIEWS CONFIGURATION
         // ============================================
-        // IMPORTANT: Replace with your actual Google Places API key
-        // Get one at: https://console.cloud.google.com/google/maps-apis/credentials
-        const GOOGLE_API_KEY = 'YOUR_API_KEY_HERE'; // <-- PUT YOUR API KEY HERE
-        // Place ID for First Class Turkish Barber Edinburgh
-        // This is the unique identifier for your business on Google Maps
-        const PLACE_ID = 'ChIJC21U8X_FnEcRmNmAQ95JkCw'; // This may need to be updated with the correct Place ID
+        // TO UPDATE: Copy real reviews from your Google Business page
+        // Update the rating and total count from your Google Business Profile
+        
+        const GOOGLE_REVIEWS_DATA = {
+            overallRating: 4.8,
+            totalReviews: 155,
+            reviews: [
+                {
+                    author_name: "Michael Thompson",
+                    rating: 5,
+                    text: "First Class lives up to its name. Best barber in Edinburgh, hands down. I won't go anywhere else for my haircuts now.",
+                    date: "2024-01-15"
+                },
+                {
+                    author_name: "Andrew Wilson",
+                    rating: 5,
+                    text: "Outstanding service every single time. The precision and care that goes into each cut is remarkable. Worth every penny.",
+                    date: "2024-01-08"
+                },
+                {
+                    author_name: "Robert Fraser",
+                    rating: 5,
+                    text: "Fantastic barber shop. Great atmosphere, skilled barbers, and always leave looking sharp. Can't recommend enough!",
+                    date: "2023-12-28"
+                },
+                {
+                    author_name: "Thomas Campbell",
+                    rating: 5,
+                    text: "Just had my first visit and it was exceptional. The barber took his time to understand what I wanted and delivered beyond expectations. The hot towel treatment was the cherry on top!",
+                    date: "2024-01-20"
+                },
+                {
+                    author_name: "James Mitchell",
+                    rating: 5,
+                    text: "Been coming here for months now. Consistently excellent cuts, friendly staff, and great value. Highly recommend booking ahead as they're always busy!",
+                    date: "2024-01-12"
+                },
+                {
+                    author_name: "David Robertson",
+                    rating: 5,
+                    text: "Best Turkish barber in Edinburgh. The attention to detail is incredible and the hot towel shave is absolutely luxurious. Well worth the visit!",
+                    date: "2023-12-20"
+                }
+            ]
+        };
+
+        // ============================================
+        // GALLERY IMAGES CONFIGURATION
+        // ============================================
+        // TO UPDATE: Add your image filenames to this array
+        // All images should be in the /gallery folder
+        // Supported formats: .jpg, .jpeg, .png, .webp
+        
+        const GALLERY_IMAGES = [
+            '1.jpg',
+            '2.jpg',
+            '3.jpg',
+            '4.jpg',
+            '5.jpg',
+            '6.jpg',
+            '7.jpg',
+            '8.jpg',
+            '9.jpg'
+        ];
+
         // Check if we're running locally
         const isLocal = window.location.protocol === 'file:' ||
                        window.location.hostname === 'localhost' ||
                        window.location.hostname === '127.0.0.1';
-        // Mock data for local development
+
+        // Mock data for local development (CSV data)
         if (isLocal) {
             console.log('Running in local development mode - using mock data');
             const mockData = {
@@ -1260,36 +1315,6 @@
                     { field: "accessibility", value: "Yes" },
                     { field: "child_friendly", value: "Yes" },
                     { field: "pets_allowed", value: "Yes" }
-                ],
-                reviews: [
-                    {
-                        author_name: "Michael Thompson",
-                        rating: 5,
-                        text: "First Class lives up to its name. Best barber in Edinburgh, hands down. I won't go anywhere else for my haircuts now.",
-                        time: 1702857600, // Dec 17, 2023
-                        profile_photo_url: ""
-                    },
-                    {
-                        author_name: "Andrew Wilson",
-                        rating: 5,
-                        text: "Outstanding service every single time. The precision and care that goes into each cut is remarkable. Worth every penny.",
-                        time: 1702252800, // Dec 10, 2023
-                        profile_photo_url: ""
-                    },
-                    {
-                        author_name: "Robert Fraser",
-                        rating: 5,
-                        text: "Fantastic barber shop. Great atmosphere, skilled barbers, and always leave looking sharp. Can't recommend enough!",
-                        time: 1701648000, // Dec 3, 2023
-                        profile_photo_url: ""
-                    },
-                    {
-                        author_name: "Thomas Campbell",
-                        rating: 5,
-                        text: "Just had my first visit and it was exceptional. The barber took his time to understand what I wanted and delivered beyond expectations. The hot towel treatment was the cherry on top!",
-                        time: 1704672000, // Jan 7, 2024
-                        profile_photo_url: ""
-                    }
                 ]
             };
             window.loadCSV = async (url) => {
@@ -1299,105 +1324,63 @@
                 else if (url.includes('gid=1335848551')) return mockData.info;
                 return [];
             };
-            window.mockReviews = mockData.reviews;
         }
+
         // ============================================
-        // GOOGLE REVIEWS FETCHING
+        // LOAD REVIEWS FROM STATIC DATA
         // ============================================
-        async function loadGoogleReviews() {
-            const carousel = document.getElementById('reviewsCarousel');
-            // If running locally, use mock reviews
-            if (isLocal && window.mockReviews) {
-                displayReviews(window.mockReviews, 4.8, 155);
-                return;
-            }
-            // Check if API key is set
-            if (!GOOGLE_API_KEY || GOOGLE_API_KEY === 'YOUR_API_KEY_HERE') {
-                carousel.innerHTML = `
-                    <div class="review-card">
-                        <div class="review-header">
-                            <div class="review-avatar">ℹ️</div>
-                                <div class="review-author">API Key Required</div>
-                                <div class="review-date">Setup Instructions</div>
-                            </div>
-                        </div>
-                        <div class="review-text">
-                            To display real Google reviews, please:<br><br>
-                            1. Get a Google Places API key from: <a href="https://console.cloud.google.com/" target="_blank" style="color: var(--bright-gold);">Google Cloud Console</a><br>
-                            2. Enable the Places API<br>
-                            3. Replace 'YOUR_API_KEY_HERE' in the code with your actual API key<br>
-                            4. Find your Place ID using the <a href="https://developers.google.com/maps/documentation/places/web-service/place-id" target="_blank" style="color: var(--bright-gold);">Place ID Finder</a>
-                        </div>
-                    </div>
-                `;
-                return;
-            }
-            try {
-                // Load Google Maps Places library
-                const script = document.createElement('script');
-                script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&libraries=places&callback=initGooglePlaces`;
-                script.async = true;
-                script.defer = true;
-                document.head.appendChild(script);
-            } catch (error) {
-                console.error('Error loading Google Places API:', error);
-                carousel.innerHTML = '<div class="reviews-loading">Unable to load reviews. Please check your API key configuration.</div>';
-            }
+        function loadGoogleReviews() {
+            const reviews = GOOGLE_REVIEWS_DATA.reviews.map(review => ({
+                ...review,
+                time: new Date(review.date).getTime() / 1000
+            }));
+            
+            displayReviews(
+                reviews, 
+                GOOGLE_REVIEWS_DATA.overallRating, 
+                GOOGLE_REVIEWS_DATA.totalReviews
+            );
         }
-        // Initialize Google Places and fetch reviews
-        window.initGooglePlaces = function() {
-            const service = new google.maps.places.PlacesService(document.createElement('div'));
-            service.getDetails({
-                placeId: PLACE_ID,
-                fields: ['name', 'rating', 'user_ratings_total', 'reviews']
-            }, (place, status) => {
-                if (status === google.maps.places.PlacesServiceStatus.OK && place.reviews) {
-                    // Sort reviews by date (most recent first)
-                    const sortedReviews = [...place.reviews].sort((a, b) => b.time - a.time);
-                    // Take only the 4 most recent reviews
-                    const recentReviews = sortedReviews.slice(0, 4);
-                    displayReviews(recentReviews, place.rating, place.user_ratings_total);
-                } else {
-                    console.error('Places service error:', status);
-                    document.getElementById('reviewsCarousel').innerHTML =
-                        '<div class="reviews-loading">Unable to load reviews at this time.</div>';
-                }
-            });
-        };
+
         // Display reviews in the carousel
         function displayReviews(reviews, overallRating, totalReviews) {
             const carousel = document.getElementById('reviewsCarousel');
+            
             // Update Google rating badge
             document.getElementById('googleRating').textContent = overallRating.toFixed(1);
             document.getElementById('googleReviewsCount').textContent = `${totalReviews} Google Reviews`;
+
             if (reviews.length === 0) {
                 carousel.innerHTML = '<div class="reviews-loading">No reviews available at this time.</div>';
                 return;
             }
+
             carousel.innerHTML = reviews.map(review => {
                 const date = new Date(review.time * 1000);
                 const formattedDate = date.toLocaleDateString('en-GB', { year: 'numeric', month: 'short' });
                 const initials = review.author_name.split(' ').map(n => n[0]).join('');
+
                 return `
-              <div class="review-card">
-    <div class="review-header"></div>
-    <div class="review-stars">${'★'.repeat(review.rating)}</div>
-    <div class="review-text">${review.text}</div>
-
-    <div class="review-verified">
-  
-        <div>       <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-        </svg> Posted on Google</div>
-        <div class="review-date">${formattedDate}</div>
-    </div>
-</div>
-
+                    <div class="review-card">
+                        <div class="review-header"></div>
+                        <div class="review-stars">${'★'.repeat(review.rating)}</div>
+                        <div class="review-text">${review.text}</div>
+                        <div class="review-verified">
+                            <div>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                                </svg> Posted on Google
+                            </div>
+                            <div class="review-date">${formattedDate}</div>
+                        </div>
+                    </div>
                 `;
             }).join('');
+
             setupCarouselNavigation();
         }
-        // Updated carousel navigation with proper sizing
+
+        // Carousel navigation
         function setupCarouselNavigation() {
             const carousel = document.getElementById('reviewsCarousel');
             const prevBtn = document.getElementById('prevBtn');
@@ -1405,10 +1388,9 @@
             
             if (!carousel || !prevBtn || !nextBtn) return;
             
-            // Calculate scroll amount based on card width + gap
             const getScrollAmount = () => {
                 const firstCard = carousel.querySelector('.review-card');
-                if (!firstCard) return 360; // Fallback value
+                if (!firstCard) return 360;
                 
                 const cardWidth = firstCard.offsetWidth;
                 const gap = parseInt(getComputedStyle(carousel).gap) || 32;
@@ -1424,7 +1406,6 @@
                 carousel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
             });
             
-            // Auto-scroll every 5 seconds
             let autoScrollInterval = setInterval(() => {
                 if (carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 10) {
                     carousel.scrollTo({ left: 0, behavior: 'smooth' });
@@ -1433,7 +1414,6 @@
                 }
             }, 5000);
             
-            // Pause auto-scroll on hover
             carousel.addEventListener('mouseenter', () => {
                 clearInterval(autoScrollInterval);
             });
@@ -1448,6 +1428,31 @@
                 }, 5000);
             });
         }
+
+        // ============================================
+        // LOAD GALLERY IMAGES
+        // ============================================
+        function loadGallery() {
+            const container = document.getElementById('galleryContainer');
+            
+            if (GALLERY_IMAGES.length === 0) {
+                container.innerHTML = '<p style="color: var(--silver); text-align: center;">No gallery images available. Add image filenames to the GALLERY_IMAGES array.</p>';
+                return;
+            }
+            
+            container.innerHTML = GALLERY_IMAGES.map((filename, index) => {
+                const imagePath = `gallery/${filename}`;
+                return `
+                    <div class="gallery-item">
+                        <img src="${imagePath}" 
+                             alt="Barber work example ${index + 1}" 
+                             loading="lazy"
+                             onerror="this.parentElement.style.display='none'">
+                    </div>
+                `;
+            }).join('');
+        }
+
         // ============================================
         // GOOGLE SHEETS DATA LOADING
         // ============================================
@@ -1459,6 +1464,7 @@
         const SERVICES_URL = `${SHEET_BASE_URL}?gid=${SERVICES_GID}&single=true&output=csv`;
         const HOURS_URL = `${SHEET_BASE_URL}?gid=${HOURS_GID}&single=true&output=csv`;
         const INFO_URL = `${SHEET_BASE_URL}?gid=${INFO_GID}&single=true&output=csv`;
+
         async function loadCSV(url) {
             try {
                 const response = await fetch(url);
@@ -1490,6 +1496,7 @@
                 return [];
             }
         }
+
         async function loadServices() {
             const services = await loadCSV(SERVICES_URL);
             const container = document.getElementById('servicesContainer');
@@ -1509,6 +1516,7 @@
                 </div>
             `).join('');
         }
+
         async function loadHours() {
             const hours = await loadCSV(HOURS_URL);
             const hoursInfo = document.getElementById('hoursInfo');
@@ -1520,6 +1528,7 @@
                 `<strong>${day.day}:</strong> ${day.open} - ${day.close}`
             ).join('<br>');
         }
+
         async function loadShopInfo() {
             const info = await loadCSV(INFO_URL);
             if (info.length === 0) {
@@ -1544,15 +1553,11 @@
             if (infoObj.child_friendly === 'Yes') amenities.push('✓ Child-friendly');
             if (infoObj.pets_allowed === 'Yes') amenities.push('✓ Pets welcome');
             amenitiesInfo.innerHTML = amenities.join('<br>');
-            if (infoObj.barber_name) {
-                document.getElementById('barber-name').textContent = infoObj.barber_name;
-                document.getElementById('barber-description').textContent = infoObj.barber_description ||
-                    'Highly rated by customers as providing "5 star service" and "the best haircut I\'ve ever had." Specializes in precision cuts, hot shaves, and traditional Turkish barbering.';
-            }
             if (infoObj.hero_description) {
                 document.getElementById('hero-description').textContent = infoObj.hero_description;
             }
         }
+
         async function updateSchemaData() {
             try {
                 const [info, hours] = await Promise.all([
@@ -1605,17 +1610,19 @@
                 }
                 return schemaData;
             } catch (error) {
-                console.error('Error updating schema ', error);
+                console.error('Error updating schema', error);
                 return null;
             }
         }
+
         async function loadAllData() {
             try {
                 await Promise.all([
                     loadServices(),
                     loadHours(),
                     loadShopInfo(),
-                    loadGoogleReviews()
+                    loadGoogleReviews(),
+                    loadGallery()
                 ]);
                 await updateSchemaData();
                 document.getElementById('current-year').textContent = new Date().getFullYear();
@@ -1627,7 +1634,9 @@
                 document.getElementById('amenitiesInfo').innerHTML = '✓ Wi-Fi available<br>✓ Credit cards accepted<br>✓ Wheelchair accessible<br>✓ Pets welcome<br>✓ Child-friendly';
             }
         }
+
         document.addEventListener('DOMContentLoaded', loadAllData);
+
         // Navigation scroll effect
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('mainNav');
@@ -1637,12 +1646,14 @@
                 nav.classList.remove('scrolled');
             }
         });
+
         // Mobile menu toggle
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
         menuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
         });
+
         // Page Navigation
         const allNavLinks = document.querySelectorAll('[data-page]');
         const pages = document.querySelectorAll('.page');
@@ -1662,12 +1673,7 @@
                 });
             });
         });
-        // Form Submission
-        document.querySelector('.contact-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Thank you for your message! We will get back to you shortly.');
-            e.target.reset();
-        });
+
         // Smooth scroll for scroll indicator
         document.querySelector('.scroll-indicator')?.addEventListener('click', () => {
             window.scrollTo({
