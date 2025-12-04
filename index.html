@@ -734,8 +734,7 @@
             font-size: 0.85rem;
             color: var(--silver);
         }
-
-        /* Gallery Grid */
+        /* Gallery Grid - OPTIMIZED */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -755,7 +754,11 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.4s ease;
+            transition: transform 0.4s ease, opacity 0.3s ease;
+            opacity: 0;
+        }
+        .gallery-item img.loaded {
+            opacity: 1;
         }
         .gallery-item::before {
             content: '';
@@ -777,6 +780,98 @@
             z-index: 2;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
+        
+        /* Image Modal */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        .image-modal.active {
+            display: flex;
+        }
+        .modal-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+        }
+        .modal-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: var(--bright-gold);
+            color: var(--rich-black);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        .modal-close:hover {
+            background: var(--deep-gold);
+            transform: rotate(90deg);
+        }
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--bright-gold);
+            color: var(--rich-black);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            z-index: 10;
+        }
+        .modal-nav:hover {
+            background: var(--deep-gold);
+            transform: translateY(-50%) scale(1.1);
+        }
+        .modal-nav.prev {
+            left: -70px;
+        }
+        .modal-nav.next {
+            right: -70px;
+        }
+        .modal-counter {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--bright-gold);
+            font-size: 1rem;
+            letter-spacing: 2px;
+        }
+        
         /* Contact Section */
         .contact-wrapper {
             display: grid;
@@ -965,6 +1060,12 @@
             .features-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+            .modal-nav.prev {
+                left: -60px;
+            }
+            .modal-nav.next {
+                right: -60px;
+            }
         }
         @media (max-width: 968px) {
             .nav-links {
@@ -1015,6 +1116,19 @@
                 max-width: 300px;
                 padding: 2rem;
             }
+            .modal-nav.prev {
+                left: 10px;
+            }
+            .modal-nav.next {
+                right: 10px;
+            }
+            .modal-close {
+                top: 10px;
+                right: 10px;
+            }
+            .modal-counter {
+                bottom: 10px;
+            }
         }
         @media (max-width: 640px) {
             .hero h1 {
@@ -1063,6 +1177,7 @@
             </ul>
         </div>
     </nav>
+
     <!-- Home Page -->
     <div class="page active" id="home">
         <section class="hero">
@@ -1082,6 +1197,7 @@
                 <p>Scroll</p>
             </div>
         </section>
+
         <section class="section">
             <div class="section-header">
                 <div class="section-label">What We Offer</div>
@@ -1106,6 +1222,7 @@
                 </div>
             </div>
         </section>
+
         <section class="testimonials-section">
             <div class="section-header">
                 <div class="section-label">Customer Reviews</div>
@@ -1132,6 +1249,7 @@
             </div>
         </section>
     </div>
+
     <!-- Services Page -->
     <div class="page" id="services">
         <section class="section">
@@ -1145,6 +1263,7 @@
             </div>
         </section>
     </div>
+
     <!-- Gallery Page -->
     <div class="page" id="gallery">
         <section class="section">
@@ -1158,6 +1277,18 @@
             </div>
         </section>
     </div>
+
+    <!-- Image Modal -->
+    <div class="image-modal" id="imageModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">×</button>
+            <button class="modal-nav prev" id="modalPrev">‹</button>
+            <img id="modalImage" src="" alt="Gallery image">
+            <button class="modal-nav next" id="modalNext">›</button>
+            <div class="modal-counter" id="modalCounter">1 / 7</div>
+        </div>
+    </div>
+
     <!-- Contact Page -->
     <div class="page" id="contact">
         <section class="section">
@@ -1187,16 +1318,17 @@
                     </div>
                 </div>
                 <div class="map-container">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2233.8636734668234!2d-3.1909628!3d55.9580634!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4887c77e54d52b0b%3A0x2c902c4de1988dc9!2sFirst%20Class%20Turkish%20Barber!5e0!3m2!1sen!2suk!4v1733356800000!5m2!1sen!2suk"
-                        allowfullscreen="" 
-                        loading="lazy" 
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2233.863673466823!2d-3.1931515!3d55.9580634!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4887c77e54d52b0b%3A0x2c902c4de1988dc9!2sFirst%20Class%20Turkish%20Barber!5e0!3m2!1sen!2suk!4v1733356800000!5m2!1sen!2suk&markers=color:gold%7C55.9580634,-3.1909628"
+                        allowfullscreen=""
+                        loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade">
                     </iframe>
                 </div>
             </div>
         </section>
     </div>
+
     <!-- Footer -->
     <footer>
         <div class="footer-content">
@@ -1225,13 +1357,11 @@
             <p>&copy; <span id="current-year">2025</span> First Class Turkish Barber Edinburgh. All rights reserved.</p>
         </div>
     </footer>
+
     <script>
         // ============================================
         // STATIC GOOGLE REVIEWS CONFIGURATION
         // ============================================
-        // TO UPDATE: Copy real reviews from your Google Business page
-        // Update the rating and total count from your Google Business Profile
-        
         const GOOGLE_REVIEWS = [
             { rating: 5, text: "First-rate hot towel shave and haircut by an exceptionally skilled and attentive barber. Highly recommend — especially if you've never experienced a Turkish hot towel shave (it'll take ten years off and your skin will feel like butter).", date: "July 2024" },
             { rating: 5, text: "Just had a haircut and my beard done. He did a fantastic job, you can tell he puts energy passion and love into his craft. I will definitely be coming back. Well done!", date: "September 2024" },
@@ -1244,55 +1374,16 @@
             { rating: 5, text: "Came in without an appointment, was able to help me immediately. Did a very good job.", date: "November 2024" },
             { rating: 5, text: "Great hair cut at a great price. I'll definitely be back next time", date: "September 2024" },
             { rating: 5, text: "Our husbands had the greatest experience here ever. These guys are super talented and meticulous with their craft. It was worth every penny, even a bargain. Go Here!!!", date: "December 2023" },
-            { rating: 5, text: "Got a very good shave and beard trim here today. Barber was very nice and skilled. Reasonable prices.", date: "December 2022" },
-            { rating: 5, text: "Out of this world hair cuts and great guys will definitely be coming back", date: "November 2024" },
-            { rating: 5, text: "The establishment offers a comprehensive range of grooming services, including beard trimming, shaving, haircutting, nose waxing, facial treatments, and towel treatments. Their expertise in these areas is highly commendable.", date: "December 2023" },
-            { rating: 5, text: "Great service and never a bad haircut.", date: "November 2024" },
-            { rating: 5, text: "Top notch service. They do all the special barber services. They waxed my nose, straight shave and shaved my neck. It was awesome. They are very friendly and the service is very affordable.", date: "December 2023" },
-            { rating: 5, text: "Highly recommend. Friendly staff good job.", date: "November 2024" },
-            { rating: 5, text: "Walked in after needing to find a new barber, was taken straight away! Amazing skin fade, offered to do my eyebrows and nose as well as my beard, all for a very reasonable price - will defo be back!", date: "April 2024" },
-            { rating: 5, text: "This is an excellent barber - the best value and most care in the New Town. I went in a mess, and came out a new man. Can't recommend highly enough.", date: "April 2024" },
-            { rating: 5, text: "I know these barbers, they are very good", date: "September 2024" },
-            { rating: 5, text: "Amazing service and quality of haircut - came here on tour. All theatre performers touring to Edinburgh I highly recommend them!!", date: "May 2024" },
-            { rating: 5, text: "BEST GROOMING EXPERIENCE EVER! I popped in to book an appointment while walking my pup, they said she could come in and have a seat while I got my trim and hot towel shave.", date: "December 2023" },
-            { rating: 5, text: "I'm going to say that this is the best barber in Edinburgh for many reasons. The attention to detail, the professionalism, and the passion for the craft is unmatched.", date: "December 2023" },
-            { rating: 5, text: "Was my first time at this barber. Gave some simple explanations of what I wanted and he gave me a great haircut. A clean shave too.", date: "May 2024" },
-            { rating: 5, text: "First class service, I had a hair cut, Shave and a little tidy up. Highly recommend!", date: "December 2023" },
-            { rating: 5, text: "Consistently some of the best cuts I've ever had! Leaves you feeling fresh and confident without fail! 100% recommend", date: "January 2024" },
-            { rating: 5, text: "Very satisfied haircut. Definitely come back again.", date: "December 2023" },
-            { rating: 5, text: "Great price and a good hair cut - what else does a man need?", date: "June 2024" },
-            { rating: 5, text: "Always a great cut from the gents here at First Class", date: "November 2024" },
-            { rating: 5, text: "Stopped by during a family vacation when one of the kids needed a haircut badly. They got to work and in no time he had one of his best cuts and we were off. Price was reasonable as well.", date: "December 2023" },
-            { rating: 5, text: "5/5 stars can't be more thankful. Truly amazing! Best barber in Edinburgh.", date: "December 2022" },
-            { rating: 5, text: "Great service, will come back", date: "November 2024" },
-            { rating: 5, text: "Booked ahead online so I could choose my preferred time. Google reviews were promising so I requested both a haircut and shave. Am glad to report my expectations were exceeded. It was the best service I've ever received.", date: "December 2022" },
-            { rating: 5, text: "Fantastic service, great hair cut.", date: "December 2023" },
-            { rating: 5, text: "Awesome! Had a shave and a haircut. This was the best experience I have ever had at any barber or stylist. I will be sending my other family members here.", date: "December 2023" },
-            { rating: 5, text: "If you want to feel like a groom every time you shave, you don't need any other option", date: "December 2021" },
-            { rating: 5, text: "Absolutely phenomenal job!!! On top of that, they squeezed me in at the end of the afternoon as a walk-in the day before Christmas Eve. Highly Recommend!", date: "January 2024" },
-            { rating: 5, text: "Got the walk in trim and hot towel shave. Very good experience. Feel fresh and lookin good for a wedding. Highly recommend", date: "December 2023" },
-            { rating: 5, text: "Best Turkish Barber i have ever been to. Thank you", date: "January 2024" },
-            { rating: 5, text: "Very polite staff. Was visiting and needed a hair cut. The barber took his time and was very polite. Even now a week later I still look great", date: "December 2023" },
-            { rating: 5, text: "Don't usually leave reviews but was so impressed with this place that I just had to. The guy who cut my hair really took the time to do a great job and I'm delighted with how it's turned out. Will definitely be back!", date: "December 2022" },
-            { rating: 5, text: "Always 10/10 haircut would recommend", date: "July 2024" },
-            { rating: 5, text: "Excellent service. Amazing fade and shape up of my beard great attention to detail. Had loads of compliments from family and friends.", date: "December 2021" },
-            { rating: 5, text: "Best barbers in Edinburgh, would highly recommend this barber's really good service and really relaxing haircut.", date: "March 2024" },
-            { rating: 5, text: "Just had a skin fade, best I have had in Edinburgh. The service was excellent and you could tell he actually cares about each individual cut. Really impressed going to be going regularly.", date: "December 2021" },
-            { rating: 5, text: "Friendly guys, listen to u well, great skin fade at a great price! Very happy all round", date: "February 2024" },
-            { rating: 5, text: "One of the best haircuts I've ever had. I wish guys like this existed in the US these days. If you want a great haircut stop by he's as good as they get.", date: "December 2022" },
-            { rating: 5, text: "As name stated. First class service, quality and professionalism. My new residence barber in Edinburgh.", date: "December 2022" },
-            { rating: 5, text: "I received very good service, the barbers are incredible", date: "December 2023" },
-            { rating: 5, text: "Great haircut for a decent price", date: "September 2024" }
+            { rating: 5, text: "Got a very good shave and beard trim here today. Barber was very nice and skilled. Reasonable prices.", date: "December 2022" }
         ];
 
         function loadGoogleReviews() {
             const carousel = document.getElementById('reviewsCarousel');
-            // Shuffle and take 12 random reviews
             const shuffled = GOOGLE_REVIEWS.sort(() => 0.5 - Math.random()).slice(0, 12);
-            
-            document.getElementById('googleRating').textContent = '4.9';
+           
+            document.getElementById('googleRating').textContent = '4.8';
             document.getElementById('googleReviewsCount').textContent = '186 Google Reviews';
-            
+           
             carousel.innerHTML = shuffled.map(review => `
                 <div class="review-card">
                     <div class="review-stars">${'★'.repeat(review.rating)}</div>
@@ -1300,36 +1391,33 @@
                     <div class="review-date">Posted on Google • ${review.date}</div>
                 </div>
             `).join('');
-
+            
             setupCarouselNavigation();
         }
 
-        // Carousel navigation
         function setupCarouselNavigation() {
             const carousel = document.getElementById('reviewsCarousel');
             const prevBtn = document.getElementById('prevBtn');
             const nextBtn = document.getElementById('nextBtn');
-            
+           
             if (!carousel || !prevBtn || !nextBtn) return;
-            
+           
             const getScrollAmount = () => {
                 const firstCard = carousel.querySelector('.review-card');
                 if (!firstCard) return 360;
-                
                 const cardWidth = firstCard.offsetWidth;
                 const gap = parseInt(getComputedStyle(carousel).gap) || 32;
-                
                 return cardWidth + gap;
             };
-            
+           
             prevBtn.addEventListener('click', () => {
                 carousel.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
             });
-            
+           
             nextBtn.addEventListener('click', () => {
                 carousel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
             });
-            
+           
             let autoScrollInterval = setInterval(() => {
                 if (carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 10) {
                     carousel.scrollTo({ left: 0, behavior: 'smooth' });
@@ -1337,11 +1425,9 @@
                     carousel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
                 }
             }, 5000);
-            
-            carousel.addEventListener('mouseenter', () => {
-                clearInterval(autoScrollInterval);
-            });
-            
+           
+            carousel.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
+           
             carousel.addEventListener('mouseleave', () => {
                 autoScrollInterval = setInterval(() => {
                     if (carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 10) {
@@ -1354,7 +1440,7 @@
         }
 
         // ============================================
-        // GALLERY IMAGES - HARD CODED
+        // GALLERY IMAGES - OPTIMIZED WITH MODAL
         // ============================================
         const GALLERY_IMAGES = [
             '2024-12-22.jpg',
@@ -1365,26 +1451,93 @@
             '473816339_1108280390802808_343745576480166505_n.jpg',
             '474725087_603782439150265_585856904096725152_n.jpg'
         ];
-        
+       
+        let currentImageIndex = 0;
+
         function loadGallery() {
             const container = document.getElementById('galleryContainer');
-            
+           
             if (GALLERY_IMAGES.length === 0) {
                 container.innerHTML = '<p style="color: var(--silver); text-align: center; padding: 3rem;">No gallery images found.</p>';
                 return;
             }
-            
+           
             container.innerHTML = GALLERY_IMAGES.map((filename, index) => `
-                <div class="gallery-item">
-                    <img src="gallery/${filename}" 
-                         alt="Barber work example ${index + 1}" 
+                <div class="gallery-item" data-index="${index}">
+                    <img src="gallery/${filename}"
+                         alt="Barber work example ${index + 1}"
                          loading="lazy"
+                         onload="this.classList.add('loaded')"
                          onerror="console.error('Image failed:', this.src); this.parentElement.style.display='none';">
                 </div>
             `).join('');
-            
+           
+            // Add click listeners to gallery items
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const index = parseInt(item.dataset.index);
+                    openModal(index);
+                });
+            });
+           
             console.log('✓ Gallery loaded with', GALLERY_IMAGES.length, 'images');
         }
+
+        function openModal(index) {
+            currentImageIndex = index;
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const counter = document.getElementById('modalCounter');
+            
+            modalImage.src = `gallery/${GALLERY_IMAGES[index]}`;
+            counter.textContent = `${index + 1} / ${GALLERY_IMAGES.length}`;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function navigateModal(direction) {
+            currentImageIndex += direction;
+            if (currentImageIndex < 0) currentImageIndex = GALLERY_IMAGES.length - 1;
+            if (currentImageIndex >= GALLERY_IMAGES.length) currentImageIndex = 0;
+            
+            const modalImage = document.getElementById('modalImage');
+            const counter = document.getElementById('modalCounter');
+            
+            modalImage.src = `gallery/${GALLERY_IMAGES[currentImageIndex]}`;
+            counter.textContent = `${currentImageIndex + 1} / ${GALLERY_IMAGES.length}`;
+        }
+
+        // Modal event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            const modalClose = document.getElementById('modalClose');
+            const modalPrev = document.getElementById('modalPrev');
+            const modalNext = document.getElementById('modalNext');
+            const modal = document.getElementById('imageModal');
+
+            modalClose.addEventListener('click', closeModal);
+            modalPrev.addEventListener('click', () => navigateModal(-1));
+            modalNext.addEventListener('click', () => navigateModal(1));
+            
+            // Close on background click
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (!modal.classList.contains('active')) return;
+                
+                if (e.key === 'Escape') closeModal();
+                if (e.key === 'ArrowLeft') navigateModal(-1);
+                if (e.key === 'ArrowRight') navigateModal(1);
+            });
+        });
 
         // ============================================
         // GOOGLE SHEETS DATA LOADING
@@ -1474,29 +1627,25 @@
             info.forEach(item => {
                 infoObj[item.field] = item.value;
             });
-            
-            // Address
+           
             const addressInfo = document.getElementById('addressInfo');
             addressInfo.innerHTML = `${infoObj.address_line1 || ''}<br>${infoObj.address_line2 || ''}<br>${infoObj.postcode || ''}`;
-            
-            // Contact info with both phone and booking
+           
             const contactInfo = document.getElementById('contactInfo');
             let contactHtml = '';
-            
+           
             if (infoObj.phone && infoObj.phone.trim()) {
                 contactHtml += `Phone: <a href="tel:${infoObj.phone.replace(/\s/g, '')}">${infoObj.phone}</a><br>`;
             }
-            
+           
             if (infoObj.booking && infoObj.booking.trim()) {
                 contactHtml += `Book online: <a href="${infoObj.booking}" target="_blank">Online Booking</a>`;
             } else {
-                // Fallback to Booksy if no booking field
                 contactHtml += `Book online: <a href="https://booksy.com/en-gb/136838_first-class-turkish-barber_barber_1576586_edinburgh" target="_blank">Booksy Booking</a>`;
             }
-            
+           
             contactInfo.innerHTML = contactHtml;
-            
-            // Amenities
+           
             const amenitiesInfo = document.getElementById('amenitiesInfo');
             const amenities = [];
             if (infoObj.wifi === 'Yes') amenities.push('✓ Wi-Fi available');
@@ -1505,87 +1654,26 @@
             if (infoObj.child_friendly === 'Yes') amenities.push('✓ Child-friendly');
             if (infoObj.pets_allowed === 'Yes') amenities.push('✓ Pets welcome');
             amenitiesInfo.innerHTML = amenities.join('<br>');
-            
-            // Hero description
+           
             if (infoObj.hero_description) {
                 document.getElementById('hero-description').textContent = infoObj.hero_description;
             }
         }
 
-        async function updateSchemaData() {
-            try {
-                const [info, hours] = await Promise.all([
-                    loadCSV(INFO_URL),
-                    loadCSV(HOURS_URL)
-                ]);
-                const infoObj = {};
-                info.forEach(item => {
-                    infoObj[item.field] = item.value;
-                });
-                const amenities = [];
-                if (infoObj.wifi === 'Yes') amenities.push('Wi-Fi');
-                if (infoObj.credit_cards === 'Yes') amenities.push('Credit cards accepted');
-                if (infoObj.accessibility === 'Yes') amenities.push('Accessible for people with disabilities');
-                if (infoObj.child_friendly === 'Yes') amenities.push('Child-friendly');
-                if (infoObj.pets_allowed === 'Yes') amenities.push('Pets allowed');
-                const schemaData = {
-                    "@context": "https://schema.org",
-                    "@type": "Barbershop",
-                    "name": "First Class Turkish Barber",
-                    "image": "images/barber-shop-interior.jpg",
-                    "url": window.location.href,
-                    "telephone": infoObj.phone || "+44-XXX-XXXXXXX",
-                    "address": {
-                        "@type": "PostalAddress",
-                        "streetAddress": infoObj.address_line1,
-                        "addressLocality": "Edinburgh",
-                        "postalCode": infoObj.postcode,
-                        "addressCountry": "UK"
-                    },
-                    "openingHoursSpecification": hours.map(day => ({
-                        "@type": "OpeningHoursSpecification",
-                        "dayOfWeek": day.day,
-                        "opens": day.open,
-                        "closes": day.close
-                    })),
-                    "priceRange": "£5–£40",
-                    "servesCuisine": "Turkish barbering",
-                    "amenityFeature": amenities.map(name => ({
-                        "@type": "LocationFeature",
-                        "name": name
-                    })),
-                    "sameAs": [
-                        "https://booksy.com/en-gb/136838_first-class-turkish-barber_barber_1576586_edinburgh"
-                    ]
-                };
-                const schemaScript = document.getElementById('dynamic-schema');
-                if (schemaScript) {
-                    schemaScript.textContent = JSON.stringify(schemaData, null, 2);
-                }
-                return schemaData;
-            } catch (error) {
-                console.error('Error updating schema', error);
-                return null;
-            }
-        }
-
         async function loadAllData() {
             try {
-                // Load all data in parallel
                 await Promise.all([
                     loadServices(),
                     loadHours(),
                     loadShopInfo()
                 ]);
-                
-                // Load reviews and gallery (synchronous)
+               
                 loadGoogleReviews();
                 loadGallery();
-                
+               
                 document.getElementById('current-year').textContent = new Date().getFullYear();
             } catch (error) {
                 console.error('Error loading data:', error);
-                // Fallback data
                 document.getElementById('addressInfo').innerHTML = '65 Broughton Street<br>Edinburgh<br>EH1 3RJ';
                 document.getElementById('contactInfo').innerHTML = 'Book online: <a href="https://booksy.com/en-gb/136838_first-class-turkish-barber_barber_1576586_edinburgh" target="_blank">Booksy</a>';
                 document.getElementById('hoursInfo').innerHTML = '<strong>Monday - Sunday:</strong> 9:00 AM - 8:00 PM';
