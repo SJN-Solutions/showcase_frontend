@@ -1255,23 +1255,13 @@
         };
 
         // ============================================
-        // GALLERY IMAGES CONFIGURATION
+        // DYNAMIC GALLERY CONFIGURATION
         // ============================================
-        // TO UPDATE: Add your image filenames to this array
-        // All images should be in the /gallery folder
-        // Supported formats: .jpg, .jpeg, .png, .webp
+        // Gallery will AUTO-DETECT all images in your /gallery folder!
+        // Just upload images - no manual configuration needed
+        // Supported formats: .jpg, .jpeg, .png, .webp, .gif
         
-        const GALLERY_IMAGES = [
-            '1.jpg',
-            '2.jpg',
-            '3.jpg',
-            '4.jpg',
-            '5.jpg',
-            '6.jpg',
-            '7.jpg',
-            '8.jpg',
-            '9.jpg'
-        ];
+        let GALLERY_IMAGES = [];
 
         // Check if we're running locally
         const isLocal = window.location.protocol === 'file:' ||
@@ -1309,7 +1299,8 @@
                     { field: "address_line1", value: "65 Broughton Street" },
                     { field: "address_line2", value: "Edinburgh" },
                     { field: "postcode", value: "EH1 3RJ" },
-                    { field: "phone", value: "" },
+                    { field: "phone", value: "+44 131 123 4567" },
+                    { field: "booking", value: "https://booksy.com/en-gb/136838_first-class-turkish-barber_barber_1576586_edinburgh" },
                     { field: "wifi", value: "Yes" },
                     { field: "credit_cards", value: "Yes" },
                     { field: "accessibility", value: "Yes" },
@@ -1430,13 +1421,90 @@
         }
 
         // ============================================
-        // LOAD GALLERY IMAGES
+        // LOAD GALLERY IMAGES DYNAMICALLY
         // ============================================
+        async function loadGalleryFromGitHub() {
+            try {
+                // Get the current repository info from the page URL
+                const pathParts = window.location.pathname.split('/').filter(p => p);
+                
+                // For GitHub Pages, the URL format is: username.github.io/repo-name/
+                // Extract username and repo
+                const hostname = window.location.hostname;
+                const username = hostname.split('.')[0]; // Gets 'username' from 'username.github.io'
+                const repo = pathParts[0] || hostname.split('.')[0]; // Repo name from path or default
+                
+                // Try to fetch the gallery directory from GitHub API
+                const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/gallery`;
+                
+                console.log(`Attempting to load gallery from: ${apiUrl}`);
+                
+                const response = await fetch(apiUrl);
+                
+                if (response.ok) {
+                    const files = await response.json();
+                    // Filter for image files only
+                    const imageExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif'];
+                    GALLERY_IMAGES = files
+                        .filter(file => file.type === 'file')
+                        .filter(file => imageExtensions.some(ext => file.name.toLowerCase().endsWith(ext)))
+                        .map(file => file.name)
+                        .sort(); // Sort alphabetically
+                    
+                    console.log(`✓ Found ${GALLERY_IMAGES.length} images in gallery folder`);
+                } else {
+                    console.log('Could not load from GitHub API, using local detection');
+                    // Fallback to trying to load known image names
+                    await tryLoadingImages();
+                }
+            } catch (error) {
+                console.log('GitHub API not available, using image detection:', error.message);
+                await tryLoadingImages();
+            }
+        }
+        
+        async function tryLoadingImages() {
+            // Try loading images with common naming patterns
+            const commonNames = [];
+            
+            // Try numbered images (1.jpg through 20.jpg)
+            for (let i = 1; i <= 20; i++) {
+                commonNames.push(`${i}.jpg`);
+                commonNames.push(`${i}.jpeg`);
+                commonNames.push(`${i}.png`);
+            }
+            
+            // Try common naming patterns
+            const patterns = ['image', 'photo', 'haircut', 'barber', 'fade', 'beard', 'shave'];
+            for (const pattern of patterns) {
+                for (let i = 1; i <= 10; i++) {
+                    commonNames.push(`${pattern}${i}.jpg`);
+                    commonNames.push(`${pattern}-${i}.jpg`);
+                }
+            }
+            
+            // Test which images actually exist
+            const existingImages = [];
+            for (const filename of commonNames) {
+                try {
+                    const testResponse = await fetch(`gallery/${filename}`, { method: 'HEAD' });
+                    if (testResponse.ok) {
+                        existingImages.push(filename);
+                    }
+                } catch (e) {
+                    // Image doesn't exist, skip it
+                }
+            }
+            
+            GALLERY_IMAGES = existingImages;
+            console.log(`✓ Detected ${GALLERY_IMAGES.length} existing images`);
+        }
+        
         function loadGallery() {
             const container = document.getElementById('galleryContainer');
             
             if (GALLERY_IMAGES.length === 0) {
-                container.innerHTML = '<p style="color: var(--silver); text-align: center;">No gallery images available. Add image filenames to the GALLERY_IMAGES array.</p>';
+                container.innerHTML = '<p style="color: var(--silver); text-align: center; padding: 3rem;">No gallery images found. Upload images to the /gallery folder.</p>';
                 return;
             }
             
@@ -1451,6 +1519,8 @@
                     </div>
                 `;
             }).join('');
+            
+            console.log(`✓ Gallery loaded with ${GALLERY_IMAGES.length} images`);
         }
 
         // ============================================
@@ -1541,10 +1611,29 @@
             info.forEach(item => {
                 infoObj[item.field] = item.value;
             });
+            
+            // Address
             const addressInfo = document.getElementById('addressInfo');
             addressInfo.innerHTML = `${infoObj.address_line1 || ''}<br>${infoObj.address_line2 || ''}<br>${infoObj.postcode || ''}`;
+            
+            // Contact info with both phone and booking
             const contactInfo = document.getElementById('contactInfo');
-            contactInfo.innerHTML = `${infoObj.phone ? `Phone: ${infoObj.phone}<br>` : ''}Book online: <a href="https://booksy.com/en-gb/136838_first-class-turkish-barber_barber_1576586_edinburgh" target="_blank">Booksy Booking</a>`;
+            let contactHtml = '';
+            
+            if (infoObj.phone && infoObj.phone.trim()) {
+                contactHtml += `Phone: <a href="tel:${infoObj.phone.replace(/\s/g, '')}">${infoObj.phone}</a><br>`;
+            }
+            
+            if (infoObj.booking && infoObj.booking.trim()) {
+                contactHtml += `Book online: <a href="${infoObj.booking}" target="_blank">Online Booking</a>`;
+            } else {
+                // Fallback to Booksy if no booking field
+                contactHtml += `Book online: <a href="https://booksy.com/en-gb/136838_first-class-turkish-barber_barber_1576586_edinburgh" target="_blank">Booksy Booking</a>`;
+            }
+            
+            contactInfo.innerHTML = contactHtml;
+            
+            // Amenities
             const amenitiesInfo = document.getElementById('amenitiesInfo');
             const amenities = [];
             if (infoObj.wifi === 'Yes') amenities.push('✓ Wi-Fi available');
@@ -1553,6 +1642,8 @@
             if (infoObj.child_friendly === 'Yes') amenities.push('✓ Child-friendly');
             if (infoObj.pets_allowed === 'Yes') amenities.push('✓ Pets welcome');
             amenitiesInfo.innerHTML = amenities.join('<br>');
+            
+            // Hero description
             if (infoObj.hero_description) {
                 document.getElementById('hero-description').textContent = infoObj.hero_description;
             }
@@ -1617,13 +1708,19 @@
 
         async function loadAllData() {
             try {
+                // First, dynamically detect gallery images
+                await loadGalleryFromGitHub();
+                
+                // Then load all other data in parallel
                 await Promise.all([
                     loadServices(),
                     loadHours(),
                     loadShopInfo(),
-                    loadGoogleReviews(),
-                    loadGallery()
+                    loadGoogleReviews()
                 ]);
+                
+                // Finally display the gallery and update schema
+                loadGallery();
                 await updateSchemaData();
                 document.getElementById('current-year').textContent = new Date().getFullYear();
             } catch (error) {
