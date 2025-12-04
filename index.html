@@ -734,6 +734,7 @@
             font-size: 0.85rem;
             color: var(--silver);
         }
+
         /* Gallery Grid */
         .gallery-grid {
             display: grid;
@@ -818,6 +819,19 @@
         .info-block a:hover {
             color: var(--deep-gold);
         }
+        .map-container {
+            width: 100%;
+            height: 450px;
+            border: 1px solid rgba(218, 165, 32, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
         .contact-form {
             display: flex;
             flex-direction: column;
@@ -875,20 +889,6 @@
         .submit-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 40px rgba(218, 165, 32, 0.4);
-        }
-        /* Map Container */
-        .map-container {
-            margin-top: 3rem;
-            background: var(--deep-charcoal);
-            border: 1px solid rgba(218, 165, 32, 0.2);
-            border-radius: 8px;
-            overflow: hidden;
-            height: 400px;
-        }
-        .map-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
         }
         /* Footer */
         footer {
@@ -1186,39 +1186,14 @@
                         <p id="amenitiesInfo">Loading...</p>
                     </div>
                 </div>
-                <div class="contact-form">
-                    <h3 style="color: var(--bright-gold); margin-bottom: 2rem; font-family: 'Playfair Display', serif;">Send us a message</h3>
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone</label>
-                            <input type="tel" id="phone" name="phone">
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" required></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">Send Message</button>
-                    </form>
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2233.8636734668234!2d-3.1909628!3d55.9580634!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4887c77e54d52b0b%3A0x2c902c4de1988dc9!2sFirst%20Class%20Turkish%20Barber!5e0!3m2!1sen!2suk!4v1733356800000!5m2!1sen!2suk"
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
                 </div>
-            </div>
-            <div class="map-container">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2233.8!2d-3.188962!3d55.958063!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4887c7ee0de085e3%3A0x2c8dcfffcef0ad8!2sFirst%20Class%20Turkish%20Barber!5e0!3m2!1sen!2suk!4v1234567890"
-                    width="100%" 
-                    height="400" 
-                    style="border:0;" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
             </div>
         </section>
     </div>
@@ -1252,209 +1227,80 @@
     </footer>
     <script>
         // ============================================
-        // UPDATED GOOGLE REVIEWS DATA - DECEMBER 2025
+        // STATIC GOOGLE REVIEWS CONFIGURATION
         // ============================================
-        const GOOGLE_REVIEWS_DATA = {
-            overallRating: 4.8,
-            totalReviews: 155,
-            reviews: [
-                {
-                    author_name: "Aaron Hoover",
-                    rating: 5,
-                    text: "First-rate hot towel shave and haircut by an exceptionally skilled and attentive barber. Highly recommend — especially if you've never experienced a Turkish hot towel shave (it'll take ten years off and your skin will feel like butter).",
-                    date: "2025-07-15"
-                },
-                {
-                    author_name: "Sas Trexw",
-                    rating: 5,
-                    text: "Just had a haircut and my beard done by Zahid. He did a fantastic job, you can tell he puts energy passion and love into his craft. I will definitely be coming back. Well done!",
-                    date: "2025-09-15"
-                },
-                {
-                    author_name: "Aaron Sutton",
-                    rating: 5,
-                    text: "Great barbers in the city centre. Come here for all my hair cuts does a good skin fade. Highly recommend to anyone.",
-                    date: "2025-11-05"
-                },
-                {
-                    author_name: "Mathieu Guettier",
-                    rating: 5,
-                    text: "Fast, I show the barber the picture I wanted and it was perfect. Fair price for quality and customer service.",
-                    date: "2025-08-15"
-                },
-                {
-                    author_name: "MichiB202",
-                    rating: 5,
-                    text: "Really good barber! First time and fully satisfied! Clean, friendly and good skills - highly recommended",
-                    date: "2025-10-05"
-                },
-                {
-                    author_name: "Mia",
-                    rating: 5,
-                    text: "My husband became 10 years younger after excellent professional treatment, haircut and shave with all the trimmings. He was very, very pleased and strongly recommend this barber!",
-                    date: "2023-12-01"
-                },
-                {
-                    author_name: "eZ clapZ Kimo",
-                    rating: 5,
-                    text: "Perfected my hair. Thank you so much. Followed my instructions well. And overall I love it",
-                    date: "2025-11-15"
-                },
-                {
-                    author_name: "Elyas El-khamlichi",
-                    rating: 5,
-                    text: "I went to this barber last Saturday, I must say I'm impressed with the service they provided. I had long hair and a messy beard. I showed them what I wanted and they did a fantastic job. Even added a custom fade.",
-                    date: "2025-02-15"
-                },
-                {
-                    author_name: "Levi Daniels",
-                    rating: 5,
-                    text: "Came in without an appointment, was able to help me immediately. Did a very good job.",
-                    date: "2025-11-05"
-                },
-                {
-                    author_name: "Chris Harris",
-                    rating: 5,
-                    text: "Great hair cut at a great price. I'll definitely be back next time",
-                    date: "2025-09-15"
-                },
-                {
-                    author_name: "Amy Anthony",
-                    rating: 5,
-                    text: "Our husbands had the greatest experience here ever. These guys are super talented and meticulous with their craft. It was worth every penny, even a bargain. Go Here!!!",
-                    date: "2024-12-01"
-                },
-                {
-                    author_name: "B Smith",
-                    rating: 5,
-                    text: "Got a very good shave and beard trim here today. Barber was very nice and skilled. Reasonable prices.",
-                    date: "2023-12-01"
-                }
-            ]
-        };
-
-        // ============================================
-        // DYNAMIC GALLERY CONFIGURATION
-        // ============================================
-        let GALLERY_IMAGES = [
-            '2024-12-22.jpg',
-            '469227014_9511587912202062_4399766851376364110_n.jpg',
-            '469597328_1413136766740170_7762022963777817322_n.jpg',
-            '471309195_2641843822679300_3913481179109103107_n.jpg',
-            '471322654_18068916511664747_2170364461708042859_n.jpg',
-            '473816339_1108280390802808_343745576480166505_n.jpg',
-            '474725087_603782439150265_585856904096725152_n.jpg'
+        // TO UPDATE: Copy real reviews from your Google Business page
+        // Update the rating and total count from your Google Business Profile
+        
+        const GOOGLE_REVIEWS = [
+            { rating: 5, text: "First-rate hot towel shave and haircut by an exceptionally skilled and attentive barber. Highly recommend — especially if you've never experienced a Turkish hot towel shave (it'll take ten years off and your skin will feel like butter).", date: "July 2024" },
+            { rating: 5, text: "Just had a haircut and my beard done. He did a fantastic job, you can tell he puts energy passion and love into his craft. I will definitely be coming back. Well done!", date: "September 2024" },
+            { rating: 5, text: "Great barbers in the city centre. Come here for all my hair cuts does a good skin fade. Highly recommend to anyone.", date: "November 2024" },
+            { rating: 5, text: "Fast, I show the barber the picture I wanted and it was perfect. Fair price for quality and customer service.", date: "August 2024" },
+            { rating: 5, text: "Really good barber! First time and fully satisfied! Clean, friendly and good skills - highly recommended", date: "October 2024" },
+            { rating: 5, text: "My husband became 10 years younger after excellent professional treatment, haircut and shave with all the trimmings. He was very, very pleased and strongly recommend this barber!", date: "December 2022" },
+            { rating: 5, text: "Perfected my hair. Thank you so much. Followed my instructions well and overall I love it", date: "November 2024" },
+            { rating: 5, text: "I went to this barber last Saturday, I must say I'm impressed with the service they provided. I had long hair and a messy beard. I showed them what I wanted and they did a fantastic job. Even added a custom fade.", date: "February 2024" },
+            { rating: 5, text: "Came in without an appointment, was able to help me immediately. Did a very good job.", date: "November 2024" },
+            { rating: 5, text: "Great hair cut at a great price. I'll definitely be back next time", date: "September 2024" },
+            { rating: 5, text: "Our husbands had the greatest experience here ever. These guys are super talented and meticulous with their craft. It was worth every penny, even a bargain. Go Here!!!", date: "December 2023" },
+            { rating: 5, text: "Got a very good shave and beard trim here today. Barber was very nice and skilled. Reasonable prices.", date: "December 2022" },
+            { rating: 5, text: "Out of this world hair cuts and great guys will definitely be coming back", date: "November 2024" },
+            { rating: 5, text: "The establishment offers a comprehensive range of grooming services, including beard trimming, shaving, haircutting, nose waxing, facial treatments, and towel treatments. Their expertise in these areas is highly commendable.", date: "December 2023" },
+            { rating: 5, text: "Great service and never a bad haircut.", date: "November 2024" },
+            { rating: 5, text: "Top notch service. They do all the special barber services. They waxed my nose, straight shave and shaved my neck. It was awesome. They are very friendly and the service is very affordable.", date: "December 2023" },
+            { rating: 5, text: "Highly recommend. Friendly staff good job.", date: "November 2024" },
+            { rating: 5, text: "Walked in after needing to find a new barber, was taken straight away! Amazing skin fade, offered to do my eyebrows and nose as well as my beard, all for a very reasonable price - will defo be back!", date: "April 2024" },
+            { rating: 5, text: "This is an excellent barber - the best value and most care in the New Town. I went in a mess, and came out a new man. Can't recommend highly enough.", date: "April 2024" },
+            { rating: 5, text: "I know these barbers, they are very good", date: "September 2024" },
+            { rating: 5, text: "Amazing service and quality of haircut - came here on tour. All theatre performers touring to Edinburgh I highly recommend them!!", date: "May 2024" },
+            { rating: 5, text: "BEST GROOMING EXPERIENCE EVER! I popped in to book an appointment while walking my pup, they said she could come in and have a seat while I got my trim and hot towel shave.", date: "December 2023" },
+            { rating: 5, text: "I'm going to say that this is the best barber in Edinburgh for many reasons. The attention to detail, the professionalism, and the passion for the craft is unmatched.", date: "December 2023" },
+            { rating: 5, text: "Was my first time at this barber. Gave some simple explanations of what I wanted and he gave me a great haircut. A clean shave too.", date: "May 2024" },
+            { rating: 5, text: "First class service, I had a hair cut, Shave and a little tidy up. Highly recommend!", date: "December 2023" },
+            { rating: 5, text: "Consistently some of the best cuts I've ever had! Leaves you feeling fresh and confident without fail! 100% recommend", date: "January 2024" },
+            { rating: 5, text: "Very satisfied haircut. Definitely come back again.", date: "December 2023" },
+            { rating: 5, text: "Great price and a good hair cut - what else does a man need?", date: "June 2024" },
+            { rating: 5, text: "Always a great cut from the gents here at First Class", date: "November 2024" },
+            { rating: 5, text: "Stopped by during a family vacation when one of the kids needed a haircut badly. They got to work and in no time he had one of his best cuts and we were off. Price was reasonable as well.", date: "December 2023" },
+            { rating: 5, text: "5/5 stars can't be more thankful. Truly amazing! Best barber in Edinburgh.", date: "December 2022" },
+            { rating: 5, text: "Great service, will come back", date: "November 2024" },
+            { rating: 5, text: "Booked ahead online so I could choose my preferred time. Google reviews were promising so I requested both a haircut and shave. Am glad to report my expectations were exceeded. It was the best service I've ever received.", date: "December 2022" },
+            { rating: 5, text: "Fantastic service, great hair cut.", date: "December 2023" },
+            { rating: 5, text: "Awesome! Had a shave and a haircut. This was the best experience I have ever had at any barber or stylist. I will be sending my other family members here.", date: "December 2023" },
+            { rating: 5, text: "If you want to feel like a groom every time you shave, you don't need any other option", date: "December 2021" },
+            { rating: 5, text: "Absolutely phenomenal job!!! On top of that, they squeezed me in at the end of the afternoon as a walk-in the day before Christmas Eve. Highly Recommend!", date: "January 2024" },
+            { rating: 5, text: "Got the walk in trim and hot towel shave. Very good experience. Feel fresh and lookin good for a wedding. Highly recommend", date: "December 2023" },
+            { rating: 5, text: "Best Turkish Barber i have ever been to. Thank you", date: "January 2024" },
+            { rating: 5, text: "Very polite staff. Was visiting and needed a hair cut. The barber took his time and was very polite. Even now a week later I still look great", date: "December 2023" },
+            { rating: 5, text: "Don't usually leave reviews but was so impressed with this place that I just had to. The guy who cut my hair really took the time to do a great job and I'm delighted with how it's turned out. Will definitely be back!", date: "December 2022" },
+            { rating: 5, text: "Always 10/10 haircut would recommend", date: "July 2024" },
+            { rating: 5, text: "Excellent service. Amazing fade and shape up of my beard great attention to detail. Had loads of compliments from family and friends.", date: "December 2021" },
+            { rating: 5, text: "Best barbers in Edinburgh, would highly recommend this barber's really good service and really relaxing haircut.", date: "March 2024" },
+            { rating: 5, text: "Just had a skin fade, best I have had in Edinburgh. The service was excellent and you could tell he actually cares about each individual cut. Really impressed going to be going regularly.", date: "December 2021" },
+            { rating: 5, text: "Friendly guys, listen to u well, great skin fade at a great price! Very happy all round", date: "February 2024" },
+            { rating: 5, text: "One of the best haircuts I've ever had. I wish guys like this existed in the US these days. If you want a great haircut stop by he's as good as they get.", date: "December 2022" },
+            { rating: 5, text: "As name stated. First class service, quality and professionalism. My new residence barber in Edinburgh.", date: "December 2022" },
+            { rating: 5, text: "I received very good service, the barbers are incredible", date: "December 2023" },
+            { rating: 5, text: "Great haircut for a decent price", date: "September 2024" }
         ];
 
-        // Check if we're running locally
-        const isLocal = window.location.protocol === 'file:' ||
-                       window.location.hostname === 'localhost' ||
-                       window.location.hostname === '127.0.0.1';
-
-        // Mock data for local development (CSV data)
-        if (isLocal) {
-            console.log('Running in local development mode - using mock data');
-            const mockData = {
-                services: [
-                    { service_name: "Hair cut", price: "20.00", duration: "30min", description: "Classic haircut with precision styling and expert finishing" },
-                    { service_name: "Skin fade", price: "20.00", duration: "30min", description: "Sharp skin fade with clean lines and perfect blending" },
-                    { service_name: "Hair cut & hot shave", price: "35.00", duration: "40min", description: "Complete grooming experience with haircut and hot towel shave" },
-                    { service_name: "Wet shave hot towel", price: "20.00", duration: "30min", description: "Traditional hot towel shave for a smooth, refreshed finish" },
-                    { service_name: "Beard trim", price: "15.00", duration: "30min", description: "Precision beard trimming and shaping to perfection" },
-                    { service_name: "Buzz cut", price: "20.00", duration: "20min", description: "Classic buzz cut for a clean, uniform look" },
-                    { service_name: "Clippers cut", price: "15.00", duration: "20min", description: "Simple clipper cut for a quick, fresh style" },
-                    { service_name: "Kids", price: "15.00", duration: "20min", description: "Professional haircut for children in a friendly environment" },
-                    { service_name: "Pensioner", price: "15.00", duration: "30min", description: "Special pricing for senior citizens" },
-                    { service_name: "Nose waxing", price: "5.00", duration: "5min", description: "Professional nose hair removal service" },
-                    { service_name: "Full service", price: "40.00", duration: "30min", description: "Complete grooming package with all the essentials" }
-                ],
-                hours: [
-                    { day: "Monday", open: "9:00 AM", close: "8:00 PM" },
-                    { day: "Tuesday", open: "9:00 AM", close: "8:00 PM" },
-                    { day: "Wednesday", open: "9:00 AM", close: "8:00 PM" },
-                    { day: "Thursday", open: "9:00 AM", close: "8:00 PM" },
-                    { day: "Friday", open: "9:00 AM", close: "8:00 PM" },
-                    { day: "Saturday", open: "9:00 AM", close: "8:00 PM" },
-                    { day: "Sunday", open: "9:00 AM", close: "8:00 PM" }
-                ],
-                info: [
-                    { field: "hero_description", value: "Premium Turkish barbering located in Broughton Street. Experience traditional cuts, hot towel shaves, and expert beard trims." },
-                    { field: "address_line1", value: "65 Broughton Street" },
-                    { field: "address_line2", value: "Edinburgh" },
-                    { field: "postcode", value: "EH1 3RJ" },
-                    { field: "phone", value: "+44 131 123 4567" },
-                    { field: "booking", value: "https://booksy.com/en-gb/136838_first-class-turkish-barber_barber_1576586_edinburgh" },
-                    { field: "wifi", value: "Yes" },
-                    { field: "credit_cards", value: "Yes" },
-                    { field: "accessibility", value: "Yes" },
-                    { field: "child_friendly", value: "Yes" },
-                    { field: "pets_allowed", value: "Yes" }
-                ]
-            };
-            window.loadCSV = async (url) => {
-                console.log(`Running locally, using mock data instead of fetching ${url}`);
-                if (url.includes('gid=0')) return mockData.services;
-                else if (url.includes('gid=2079487819')) return mockData.hours;
-                else if (url.includes('gid=1335848551')) return mockData.info;
-                return [];
-            };
-        }
-
-        // ============================================
-        // LOAD REVIEWS FROM STATIC DATA
-        // ============================================
         function loadGoogleReviews() {
-            const reviews = GOOGLE_REVIEWS_DATA.reviews.map(review => ({
-                ...review,
-                time: new Date(review.date).getTime() / 1000
-            }));
-           
-            displayReviews(
-                reviews,
-                GOOGLE_REVIEWS_DATA.overallRating,
-                GOOGLE_REVIEWS_DATA.totalReviews
-            );
-        }
-
-        // Display reviews in the carousel
-        function displayReviews(reviews, overallRating, totalReviews) {
             const carousel = document.getElementById('reviewsCarousel');
-           
-            // Update Google rating badge
-            document.getElementById('googleRating').textContent = overallRating.toFixed(1);
-            document.getElementById('googleReviewsCount').textContent = `${totalReviews} Google Reviews`;
+            // Shuffle and take 12 random reviews
+            const shuffled = GOOGLE_REVIEWS.sort(() => 0.5 - Math.random()).slice(0, 12);
             
-            if (reviews.length === 0) {
-                carousel.innerHTML = '<div class="reviews-loading">No reviews available at this time.</div>';
-                return;
-            }
+            document.getElementById('googleRating').textContent = '4.9';
+            document.getElementById('googleReviewsCount').textContent = '186 Google Reviews';
             
-            carousel.innerHTML = reviews.map(review => {
-                const date = new Date(review.time * 1000);
-                const formattedDate = date.toLocaleDateString('en-GB', { year: 'numeric', month: 'short' });
-                const initials = review.author_name.split(' ').map(n => n[0]).join('');
-                return `
-                    <div class="review-card">
-                        <div class="review-header">
-                            <div class="review-avatar">${initials}</div>
-                            <div class="review-author-info">
-                                <div class="review-author">${review.author_name}</div>
-                                <div class="review-date">${formattedDate}</div>
-                            </div>
-                        </div>
-                        <div class="review-stars">${'★'.repeat(review.rating)}</div>
-                        <div class="review-text">${review.text}</div>
-                        <div class="review-verified">
-                            <div>
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                                </svg> Posted on Google
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-            
+            carousel.innerHTML = shuffled.map(review => `
+                <div class="review-card">
+                    <div class="review-stars">${'★'.repeat(review.rating)}</div>
+                    <div class="review-text">${review.text}</div>
+                    <div class="review-date">Posted on Google • ${review.date}</div>
+                </div>
+            `).join('');
+
             setupCarouselNavigation();
         }
 
@@ -1463,27 +1309,27 @@
             const carousel = document.getElementById('reviewsCarousel');
             const prevBtn = document.getElementById('prevBtn');
             const nextBtn = document.getElementById('nextBtn');
-           
+            
             if (!carousel || !prevBtn || !nextBtn) return;
-           
+            
             const getScrollAmount = () => {
                 const firstCard = carousel.querySelector('.review-card');
                 if (!firstCard) return 360;
-               
+                
                 const cardWidth = firstCard.offsetWidth;
                 const gap = parseInt(getComputedStyle(carousel).gap) || 32;
-               
+                
                 return cardWidth + gap;
             };
-           
+            
             prevBtn.addEventListener('click', () => {
                 carousel.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
             });
-           
+            
             nextBtn.addEventListener('click', () => {
                 carousel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
             });
-           
+            
             let autoScrollInterval = setInterval(() => {
                 if (carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 10) {
                     carousel.scrollTo({ left: 0, behavior: 'smooth' });
@@ -1491,11 +1337,11 @@
                     carousel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
                 }
             }, 5000);
-           
+            
             carousel.addEventListener('mouseenter', () => {
                 clearInterval(autoScrollInterval);
             });
-           
+            
             carousel.addEventListener('mouseleave', () => {
                 autoScrollInterval = setInterval(() => {
                     if (carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 10) {
@@ -1508,106 +1354,36 @@
         }
 
         // ============================================
-        // LOAD GALLERY IMAGES DYNAMICALLY
+        // GALLERY IMAGES - HARD CODED
         // ============================================
-        async function loadGalleryFromGitHub() {
-            try {
-                // Get the current repository info from the page URL
-                const pathParts = window.location.pathname.split('/').filter(p => p);
-               
-                // For GitHub Pages, the URL format is: username.github.io/repo-name/
-                // Extract username and repo
-                const hostname = window.location.hostname;
-                const username = hostname.split('.')[0]; // Gets 'username' from 'username.github.io'
-                const repo = pathParts[0] || hostname.split('.')[0]; // Repo name from path or default
-               
-                // Try to fetch the gallery directory from GitHub API
-                const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/gallery`;
-               
-                console.log(`Attempting to load gallery from: ${apiUrl}`);
-               
-                const response = await fetch(apiUrl);
-               
-                if (response.ok) {
-                    const files = await response.json();
-                    // Filter for image files only
-                    const imageExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif'];
-                    GALLERY_IMAGES = files
-                        .filter(file => file.type === 'file')
-                        .filter(file => imageExtensions.some(ext => file.name.toLowerCase().endsWith(ext)))
-                        .map(file => file.name)
-                        .sort(); // Sort alphabetically
-                   
-                    console.log(`✓ Found ${GALLERY_IMAGES.length} images in gallery folder`);
-                } else {
-                    console.log('Could not load from GitHub API, using local detection');
-                    // Fallback to trying to load known image names
-                    await tryLoadingImages();
-                }
-            } catch (error) {
-                console.log('GitHub API not available, using image detection:', error.message);
-                await tryLoadingImages();
-            }
-        }
-       
-        async function tryLoadingImages() {
-            // Try loading images with common naming patterns
-            const commonNames = [];
-           
-            // Try numbered images (1.jpg through 20.jpg)
-            for (let i = 1; i <= 20; i++) {
-                commonNames.push(`${i}.jpg`);
-                commonNames.push(`${i}.jpeg`);
-                commonNames.push(`${i}.png`);
-            }
-           
-            // Try common naming patterns
-            const patterns = ['image', 'photo', 'haircut', 'barber', 'fade', 'beard', 'shave'];
-            for (const pattern of patterns) {
-                for (let i = 1; i <= 10; i++) {
-                    commonNames.push(`${pattern}${i}.jpg`);
-                    commonNames.push(`${pattern}-${i}.jpg`);
-                }
-            }
-           
-            // Test which images actually exist
-            const existingImages = [];
-            for (const filename of commonNames) {
-                try {
-                    const testResponse = await fetch(`gallery/${filename}`, { method: 'HEAD' });
-                    if (testResponse.ok) {
-                        existingImages.push(filename);
-                    }
-                } catch (e) {
-                    // Image doesn't exist, skip it
-                }
-            }
-           
-            GALLERY_IMAGES = existingImages;
-            console.log(`✓ Detected ${GALLERY_IMAGES.length} existing images`);
-        }
-       
+        const GALLERY_IMAGES = [
+            '2024-12-22.jpg',
+            '469227014_9511587912202062_4399766851376364110_n.jpg',
+            '469597328_1413136766740170_7762022963777817322_n.jpg',
+            '471309195_2641843822679300_3913481179109103107_n.jpg',
+            '471322654_18068916511664747_2170364461708042859_n.jpg',
+            '473816339_1108280390802808_343745576480166505_n.jpg',
+            '474725087_603782439150265_585856904096725152_n.jpg'
+        ];
+        
         function loadGallery() {
             const container = document.getElementById('galleryContainer');
-           
+            
             if (GALLERY_IMAGES.length === 0) {
-                container.innerHTML = '<p style="color: var(--silver); text-align: center; padding: 3rem;">No gallery images found. Upload images to the /gallery folder.</p>';
+                container.innerHTML = '<p style="color: var(--silver); text-align: center; padding: 3rem;">No gallery images found.</p>';
                 return;
             }
-           
-            container.innerHTML = GALLERY_IMAGES.map((filename, index) => {
-                const imagePath = `./gallery/${filename}`; // Using relative path
-                return `
-                    <div class="gallery-item">
-                        <img src="${imagePath}"
-                             alt="Barber work example ${index + 1}"
-                             loading="lazy"
-                             onerror="this.parentElement.style.display='none'; console.log('Failed to load:', '${imagePath}')">
-                    </div>
-                `;
-            }).join('');
-           
-            console.log(`✓ Gallery loaded with ${GALLERY_IMAGES.length} images`);
+            
+            container.innerHTML = GALLERY_IMAGES.map((filename, index) => `
+                <div class="gallery-item">
+                    <img src="gallery/${filename}" 
+                         alt="Barber work example ${index + 1}" 
+                         loading="lazy"
+                         onerror="console.error('Image failed:', this.src); this.parentElement.style.display='none';">
+                </div>
+            `).join('');
+            
+            console.log('✓ Gallery loaded with', GALLERY_IMAGES.length, 'images');
         }
 
         // ============================================
@@ -1698,28 +1474,28 @@
             info.forEach(item => {
                 infoObj[item.field] = item.value;
             });
-           
+            
             // Address
             const addressInfo = document.getElementById('addressInfo');
             addressInfo.innerHTML = `${infoObj.address_line1 || ''}<br>${infoObj.address_line2 || ''}<br>${infoObj.postcode || ''}`;
-           
+            
             // Contact info with both phone and booking
             const contactInfo = document.getElementById('contactInfo');
             let contactHtml = '';
-           
+            
             if (infoObj.phone && infoObj.phone.trim()) {
                 contactHtml += `Phone: <a href="tel:${infoObj.phone.replace(/\s/g, '')}">${infoObj.phone}</a><br>`;
             }
-           
+            
             if (infoObj.booking && infoObj.booking.trim()) {
                 contactHtml += `Book online: <a href="${infoObj.booking}" target="_blank">Online Booking</a>`;
             } else {
                 // Fallback to Booksy if no booking field
                 contactHtml += `Book online: <a href="https://booksy.com/en-gb/136838_first-class-turkish-barber_barber_1576586_edinburgh" target="_blank">Booksy Booking</a>`;
             }
-           
+            
             contactInfo.innerHTML = contactHtml;
-           
+            
             // Amenities
             const amenitiesInfo = document.getElementById('amenitiesInfo');
             const amenities = [];
@@ -1729,7 +1505,7 @@
             if (infoObj.child_friendly === 'Yes') amenities.push('✓ Child-friendly');
             if (infoObj.pets_allowed === 'Yes') amenities.push('✓ Pets welcome');
             amenitiesInfo.innerHTML = amenities.join('<br>');
-           
+            
             // Hero description
             if (infoObj.hero_description) {
                 document.getElementById('hero-description').textContent = infoObj.hero_description;
@@ -1795,47 +1571,27 @@
 
         async function loadAllData() {
             try {
-                // First, dynamically detect gallery images
-                await loadGalleryFromGitHub();
-               
-                // Then load all other data in parallel
+                // Load all data in parallel
                 await Promise.all([
                     loadServices(),
                     loadHours(),
-                    loadShopInfo(),
-                    loadGoogleReviews()
+                    loadShopInfo()
                 ]);
-               
-                // Finally display the gallery and update schema
+                
+                // Load reviews and gallery (synchronous)
+                loadGoogleReviews();
                 loadGallery();
-                await updateSchemaData();
+                
                 document.getElementById('current-year').textContent = new Date().getFullYear();
             } catch (error) {
                 console.error('Error loading data:', error);
+                // Fallback data
                 document.getElementById('addressInfo').innerHTML = '65 Broughton Street<br>Edinburgh<br>EH1 3RJ';
-                document.getElementById('contactInfo').innerHTML = 'Book online: <a href="https://booksy.com/en-gb/136838_first-class-turkish-barber_barber_1576586_edinburgh" target="_blank">Booksy Booking</a>';
+                document.getElementById('contactInfo').innerHTML = 'Book online: <a href="https://booksy.com/en-gb/136838_first-class-turkish-barber_barber_1576586_edinburgh" target="_blank">Booksy</a>';
                 document.getElementById('hoursInfo').innerHTML = '<strong>Monday - Sunday:</strong> 9:00 AM - 8:00 PM';
-                document.getElementById('amenitiesInfo').innerHTML = '✓ Wi-Fi available<br>✓ Credit cards accepted<br>✓ Wheelchair accessible<br>✓ Pets welcome<br>✓ Child-friendly';
+                document.getElementById('amenitiesInfo').innerHTML = '✓ Wi-Fi<br>✓ Cards<br>✓ Accessible<br>✓ Child-friendly<br>✓ Pets';
             }
         }
-
-        // Contact form handling
-        document.addEventListener('DOMContentLoaded', function() {
-            const contactForm = document.getElementById('contactForm');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    const formData = new FormData(this);
-                    const data = Object.fromEntries(formData);
-                    
-                    // Here you would typically send the data to your server
-                    // For now, we'll just show a success message
-                    alert('Thank you for your message! We will get back to you soon.');
-                    this.reset();
-                });
-            }
-        });
 
         document.addEventListener('DOMContentLoaded', loadAllData);
 
