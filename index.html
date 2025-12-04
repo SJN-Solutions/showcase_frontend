@@ -1518,20 +1518,19 @@
             }
             
             container.innerHTML = GALLERY_IMAGES.map((filename, index) => {
-                const imagePath = `gallery/${filename}`;
+                const imagePath = `./gallery/${filename}`; // Added ./ for relative path
                 return `
                     <div class="gallery-item">
-                        <img src="${imagePath}" 
-                             alt="Barber work example ${index + 1}" 
-                             loading="lazy"
-                             onerror="this.parentElement.style.display='none'">
+                        <img src="${imagePath}"
+                            alt="Barber work example ${index + 1}"
+                            loading="lazy"
+                            onerror="this.parentElement.style.display='none'; console.log('Failed to load:', '${imagePath}')">
                     </div>
                 `;
             }).join('');
             
             console.log(`✓ Gallery loaded with ${GALLERY_IMAGES.length} images`);
         }
-
         // ============================================
         // GOOGLE SHEETS DATA LOADING
         // ============================================
