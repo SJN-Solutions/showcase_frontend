@@ -1696,11 +1696,11 @@
                 contactHtml += `Phone: <a href="tel:${infoObj.phone.replace(/\s/g, '')}">${infoObj.phone}</a><br>`;
             }
            
-            if (infoObj.booking && infoObj.booking.trim()) {
-                contactHtml += `Book online: <a href="https://booksy.com/en-gb/136838_first-class-turkish-barber_barber_1576586_edinburgh" target="_blank">Booksy Booking</a>`;
-            } else {
-                contactHtml += `Book online: <a href="https://booksy.com/en-gb/136838_first-class-turkish-barber_barber_1576586_edinburgh" target="_blank">Booksy Booking</a>`;
-            }
+            //if (infoObj.booking && infoObj.booking.trim()) {
+            //    contactHtml += `Book online: <a href="https://booksy.com/en-gb/136838_first-class-turkish-barber_barber_1576586_edinburgh" target="_blank">Booksy Booking</a>`;
+            //} else {
+            //    contactHtml += `Book online: <a href="https://booksy.com/en-gb/136838_first-class-turkish-barber_barber_1576586_edinburgh" target="_blank">Booksy Booking</a>`;
+            //}
            
             contactInfo.innerHTML = contactHtml;
            
@@ -1733,7 +1733,7 @@
             } catch (error) {
                 console.error('Error loading data:', error);
                 document.getElementById('addressInfo').innerHTML = '65 Broughton Street<br>Edinburgh<br>EH1 3RJ';
-                document.getElementById('contactInfo').innerHTML = 'Book online: <a href="https://booksy.com/en-gb/136838_first-class-turkish-barber_barber_1576586_edinburgh" target="_blank">Booksy</a>';
+                //document.getElementById('contactInfo').innerHTML = 'Book online: <a href="https://booksy.com/en-gb/136838_first-class-turkish-barber_barber_1576586_edinburgh" target="_blank">Booksy</a>';
                 document.getElementById('hoursInfo').innerHTML = '<strong>Monday - Sunday:</strong> 9:00 AM - 8:00 PM';
                 document.getElementById('amenitiesInfo').innerHTML = '✓ Wi-Fi<br>✓ Cards<br>✓ Accessible<br>✓ Child-friendly<br>✓ Pets';
             }
